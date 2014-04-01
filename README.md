@@ -1,4 +1,4 @@
-base-api-php
+PipeDrive-api-php
 ============
 
-PHP API client library for the BaseCRM
+PHP API client library for the PipeDrive CRM
