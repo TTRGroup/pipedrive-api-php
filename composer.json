@@ -1,8 +1,8 @@
 {
-    "name": "benhawker/basecrm",
+    "name": "benhawker/pipedrive",
     "type": "library",
     "version": "0.1",
-    "description": "API client library for the BaseCRM",
+    "description": "API client library for the Pipedrive CRM",
     "keywords": ["crm", "api"],
     "homepage": "",
     "license": "MIT",
@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Benhawker\\Basecrm": "src/"
+            "Benhawker\\Pipedrive": "src/"
         }
     },
     "minimum-stability": "dev"
