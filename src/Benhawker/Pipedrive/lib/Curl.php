@@ -1,113 +1,220 @@
-<?php namespace Benhawker\Pipdrive\lib;
+<?php namespace Benhawker\Pipedrive\lib;
 
 use Benhawker\Pipedrive\Exceptions\PipedriveHttpError;
 use Benhawker\Pipedrive\Exceptions\PipedriveApiError;
 
+/**
+ * This class does the cURL requests for Pipedrive
+ */
 class Curl
 {
+    /**
+     * User Agent used to send to API
+     */
     const USER_AGENT = 'Pipedrive-PHP/0.1';
 
+    /**
+     * API Key
+     * @var string
+     */
+    protected $apiKey;
+    /**
+     * API Url
+     * @var string
+     */
+    protected $url;
+    /**
+     * Client URL Library
+     * @var curl session
+     */
     public $curl;
 
-    public function __construct()
+    /**
+     * Initialise the cURL session and set headers
+     */
+    public function __construct($url, $apiKey)
     {
+        //set URL and API Key
+        $this->url    = $url;
+        $this->apiKey = $apiKey;
+
+        //Intialise cURL session
         $this->curl = curl_init();
-        $this->setOpt(CURLOPT_USERAGENT, self::USER_AGENT);
-        $this->setOpt(CURLOPT_HEADER, false);
-        $this->setOpt(CURLOPT_RETURNTRANSFER, true);
+        //Set up options for cURL session
+        $this->setOpt(CURLOPT_USERAGENT, self::USER_AGENT)
+             ->setOpt(CURLOPT_HEADER, false)
+             ->setOpt(CURLOPT_RETURNTRANSFER, true)
+             ->setOpt(CURLOPT_HTTPHEADER, array("Accept: application/json"));
     }
 
+    /**
+     * Close cURL session
+     */
     public function __destruct()
     {
+        //if session is open close it
         if (is_resource($this->curl)) {
             curl_close($this->curl);
         }
     }
 
-    public function setOpt($option, $value)
+    /**
+     * Makes cURL get Request
+     *
+     * @param  string $method Pipedrive method
+     * @return array  decoded Json Output
+     */
+    public function get($method)
     {
-        return curl_setopt($this->curl, $option, $value);
+        //set cURL transfer option for get request
+        // and get ouput
+        return $this->createEndPoint($method)
+                    ->setOpt(CURLOPT_CUSTOMREQUEST, 'GET')
+                    ->setopt(CURLOPT_HTTPGET, true)
+                    ->exec();
     }
 
-    public function get($url, $data = array())
+    /**
+     * Makes cURL get Request
+     *
+     * @param  string $method Pipedrive method
+     * @return array  decoded Json Output
+     */
+    public function post($method, array $data)
     {
-
-        $this->setopt(CURLOPT_URL, $this->buildURL($url, $data));
-        $this->setOpt(CURLOPT_CUSTOMREQUEST, 'GET');
-        $this->setopt(CURLOPT_HTTPGET, true);
-
-        return $this->exec();
+        //set cURL transfer option for post request
+        // and get ouput
+        return $this->createEndPoint($method)
+                    ->setOpt(CURLOPT_CUSTOMREQUEST, 'POST')
+                    ->setOpt(CURLOPT_POST, true)
+                    ->setOpt(CURLOPT_POSTFIELDS, $this->postfields($data))
+                    ->exec();
     }
 
-    public function post($url, $data = array())
+    /**
+     * Makes cURL get Request
+     *
+     * @param  string $method Pipedrive method
+     * @return array  decoded Json Output
+     */
+    public function put($method, array $data)
     {
-        $this->setOpt(CURLOPT_URL, $this->buildURL($url));
-        $this->setOpt(CURLOPT_CUSTOMREQUEST, 'POST');
-        $this->setOpt(CURLOPT_POST, true);
-        $this->setOpt(CURLOPT_POSTFIELDS, $this->postfields($data));
-
-        return $this->exec();
+        //set cURL transfer option for post request
+        // and get ouput
+        return $this->createEndPoint($method)
+                    ->setOpt(CURLOPT_CUSTOMREQUEST, 'PUT')
+                    ->setOpt(CURLOPT_POSTFIELDS, http_build_query($data))
+                    ->exec();
     }
 
-    public function put($url, $data = array())
+    /**
+     * Makes cURL get Request
+     *
+     * @param  string $method Pipedrive method
+     * @return array  decoded Json Output
+     */
+    public function delete($method)
     {
-        $this->setOpt(CURLOPT_URL, $url);
-        $this->setOpt(CURLOPT_CUSTOMREQUEST, 'PUT');
-        $this->setOpt(CURLOPT_POSTFIELDS, http_build_query($data));
-
-        return $this->exec();
+        //set cURL transfer option for delete request
+        // and get ouput
+        return $this->createEndPoint($method)
+                    ->setOpt(CURLOPT_CUSTOMREQUEST, 'DELETE')
+                    ->exec();
     }
 
-    public function delete($url, $data = array())
+    /**
+     * Execute current cURL session
+     *
+     * @return array decoded json ouput
+     */
+    protected function exec()
     {
-        $this->setOpt(CURLOPT_URL, $this->buildURL($url, $data));
-        $this->setOpt(CURLOPT_CUSTOMREQUEST, 'DELETE');
+        //get response output and info
+        $response = curl_exec($this->curl);
+        $info     = curl_getinfo($this->curl);
 
-        return $this->exec();
+        //if there is a curl error throw Exception
+        if (curl_error($this->curl)) {
+            //throw error
+            throw new PipedriveHttpError('API call failed: ' . curl_error($this->curl));
+        }
+
+        //decode output
+        $result = json_decode($response, true);
+
+        //if http error throw exception
+        if (floor($info['http_code'] / 100) >= 4) {
+            //throw error
+            throw new PipedriveApiError('API HTTP Error ' . $info['http_code'] . '. Message ' . $result['error']);
+        }
+        // return output
+        return $result;
     }
 
-    private function buildURL($url, $data = array())
+    /**
+     * Set an option for a cURL transfer
+     *
+     * @param string $option option
+     * @param string $value  value
+     *
+     * @return object $this this object
+     */
+    protected function setOpt($option, $value)
     {
-        return $url . (empty($data) ? '' : '?' . http_build_query($data));
+        //set cURL transfer option
+        curl_setopt($this->curl, $option, $value);
+        // return the current object
+        return $this;
     }
 
-    private function postfields($data)
+    /**
+     * takes the pipedrive method and turns it into the correct URL endpoint
+     * by adding the method and API key
+     *
+     * @param  string $method Pipedrive method
+     * @return object $this   Current Object
+     */
+    protected function createEndPoint($method)
     {
+        //create array for api key
+        $data['api_token'] = $this->apiKey;
+        //make API end point
+        $endPoint = $this->url  . '/' . $method . '?' . http_build_query($data);
+        //set API endpoint
+        $this->setOpt(CURLOPT_URL, $endPoint);
 
+        //return this object
+        return $this;
+    }
+
+    /**
+     * Loops through post field array and removes any empty arrays
+     * if there is an @ symbol at the front of the string we assume it
+     * is a file and set up a CURLFile object
+     *
+     * @param  array $data post fields
+     * @return array updated postfields
+     */
+    protected function postfields(array $data)
+    {
+        //loop through array
         foreach ($data as $key => $value) {
+
             // Fix "Notice: Array to string conversion" when $value in
             // curl_setopt($ch, CURLOPT_POSTFIELDS, $value) is an array
             // that contains an empty array.
             if (is_array($value) && empty($value)) {
                 $data[$key] = '';
+            }
             // Fix "curl_setopt(): The usage of the @filename API for
             // file uploading is deprecated. Please use the CURLFile
             // class instead".
-            } elseif (is_string($value) && strpos($value, '@') === 0) {
-                if (class_exists('CURLFile')) {
-                    $data[$key] = new CURLFile(substr($value, 1));
-                }
+            elseif (is_string($value) && strpos($value, '@') === 0) {
+                // add file
+                $data[$key] = new CURLFile(substr($value, 1));
             }
         }
-
+        //return array
         return $data;
-    }
-
-    protected function exec()
-    {
-        $response = curl_exec($this->curl);
-        $info     = curl_getinfo($this->curl);
-
-        if (curl_error($this->curl)) {
-            //throw error
-            throw new PipedriveHttpError('API call failed' . curl_error($this->curl));
-        }
-
-        if (floor($info['http_code'] / 100) >= 4) {
-            throw new PipedriveApiError('API call failed' . curl_error($this->curl));
-        }
-
-        $result = json_decode($response, true);
-
     }
 }
