@@ -1,4 +1,4 @@
-<?php namespace Benhawker\Pipedrive\lib;
+<?php namespace Benhawker\Pipedrive\Library;
 
 use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
 

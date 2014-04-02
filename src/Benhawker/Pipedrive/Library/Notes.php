@@ -1,4 +1,4 @@
-<?php namespace Benhawker\Pipedrive\lib;
+<?php namespace Benhawker\Pipedrive\Library;
 
 /**
  * Pipedrive Notes Methods
