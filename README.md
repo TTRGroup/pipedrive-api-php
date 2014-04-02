@@ -9,8 +9,8 @@ Recommend you install this library through composer. https://packagist.org/packa
 
 API Docs can be found here: https://developers.pipedrive.com/v1
 
-Example:
-`
+Example:  
+  
 use Benhawker\Pipedrive\Pipedrive;  
 
 $pipedrive = new Pipedrive('0deceea867202fcf3889cd507ef93a91789f7e3a');  
@@ -44,4 +44,3 @@ $activity = array(
                     );  
 
 $pipedrive->activities()->add($activity);
-`
