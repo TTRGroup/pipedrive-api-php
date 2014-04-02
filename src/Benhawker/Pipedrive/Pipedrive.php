@@ -98,13 +98,13 @@ class Pipedrive
         $url = $protocol . '://' . $host . '/' . $version;
 
         //add curl library and pass the API Url & key to the object
-        $this->curl = new lib\Curl($url, $apiKey);
+        $this->curl = new Library\Curl($url, $apiKey);
 
         //add pipedrive classes to the assoicated property
-        $this->persons    = new lib\Persons($this);
-        $this->deals      = new lib\Deals($this);
-        $this->activities = new lib\Activities($this);
-        $this->notes      = new lib\Notes($this);
+        $this->persons    = new Library\Persons($this);
+        $this->deals      = new Library\Deals($this);
+        $this->activities = new Library\Activities($this);
+        $this->notes      = new Library\Notes($this);
     }
 
     /**
