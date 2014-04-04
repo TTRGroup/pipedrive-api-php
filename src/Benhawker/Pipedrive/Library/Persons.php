@@ -21,7 +21,7 @@ class Persons
     /**
      * Initialise the object load master class
      */
-    public function __construct($master)
+    public function __construct(\Benhawker\Pipedrive\Pipedrive $master)
     {
         //associate curl class
         $this->curl = $master->curl();

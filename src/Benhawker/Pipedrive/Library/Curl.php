@@ -187,6 +187,13 @@ class Curl
         return $this;
     }
 
+    /**************************************************\
+
+     ALL FOLLOWING METHODS ARE BASED ON :
+     https://github.com/php-curl-class/php-curl-class
+
+    \**************************************************/
+
     /**
      * Loops through post field array and removes any empty arrays
      * if there is an @ symbol at the front of the string we assume it
@@ -195,26 +202,87 @@ class Curl
      * @param  array $data post fields
      * @return array updated postfields
      */
-    protected function postfields(array $data)
+    protected function postfields($data)
     {
-        //loop through array
-        foreach ($data as $key => $value) {
+        if (is_array($data)) {
+            //if mulitdimensional array
+            if ($this->isArrayMultiDim($data)) {
+                // build bultidimensial query
+                $data = $this->httpBuildMultiQuery($data);
+            } else {
+                //loop through array
+                foreach ($data as $key => $value) {
 
-            // Fix "Notice: Array to string conversion" when $value in
-            // curl_setopt($ch, CURLOPT_POSTFIELDS, $value) is an array
-            // that contains an empty array.
-            if (is_array($value) && empty($value)) {
-                $data[$key] = '';
-            }
-            // Fix "curl_setopt(): The usage of the @filename API for
-            // file uploading is deprecated. Please use the CURLFile
-            // class instead".
-            elseif (is_string($value) && strpos($value, '@') === 0) {
-                // add file
-                $data[$key] = new CURLFile(substr($value, 1));
+                    // Fix "Notice: Array to string conversion" when $value in
+                    // curl_setopt($ch, CURLOPT_POSTFIELDS, $value) is an array
+                    // that contains an empty array.
+                    if (is_array($value) && empty($value)) {
+                        $data[$key] = '';
+                    }
+                    // Fix "curl_setopt(): The usage of the @filename API for
+                    // file uploading is deprecated. Please use the CURLFile
+                    // class instead".
+                    elseif (is_string($value) && strpos($value, '@') === 0) {
+                        // add file
+                        $data[$key] = new CURLFile(substr($value, 1));
+                    }
+                }
             }
         }
-        //return array
+
         return $data;
     }
+
+    /**
+     * Build multidimenianl query
+     * from: https://github.com/php-curl-class/php-curl-class
+     *
+     * @param  array  $data post data
+     * @param  string $key  nested key
+     * @return string
+     */
+    private function httpBuildMultiQuery(array $data, $key = null)
+        {
+            $query = array();
+
+            if (empty($data)) {
+                return $key . '=';
+            }
+
+            $isArrayAssoc = $this->isArrayAssoc($data);
+
+            // build
+            foreach ($data as $k => $value) {
+                if (is_string($value) || is_numeric($value)) {
+                    $brackets = $isArrayAssoc ? '[' . $k . ']' : '[]';
+                    $query[] = urlencode(is_null($key) ? $k : $key . $brackets) . '=' . rawurlencode($value);
+                } elseif (is_array($value)) {
+                    $nested = is_null($key) ? $k : $key . '[' . $k . ']';
+                    $query[] = $this->httpBuildMultiQuery($value, $nested);
+                }
+            }
+
+            return implode('&', $query);
+        }
+
+        /**
+         * From https://github.com/php-curl-class/php-curl-class
+         * @param  array  $array
+         * @return boolean
+         */
+        private function isArrayAssoc($array)
+        {
+            return (bool) count(array_filter(array_keys($array), 'is_string'));
+        }
+
+        /**
+         * From https://github.com/php-curl-class/php-curl-class
+         * @param  array  $array
+         * @return boolean
+         */
+        private function isArrayMultiDim($array)
+        {
+            if (!is_array($array)) return false;
+            return !(count($array) === count($array, COUNT_RECURSIVE));
+        }
 }

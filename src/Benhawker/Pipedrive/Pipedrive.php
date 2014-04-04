@@ -77,6 +77,11 @@ class Pipedrive
      * @var Notes Object
      */
     protected $notes;
+    /**
+     * Placeholder attritube for the pipedrive dealFields class
+     * @var Notes Object
+     */
+    protected $dealFields;
 
     /**
      * Set up API url and load library classes
@@ -105,6 +110,7 @@ class Pipedrive
         $this->deals      = new Library\Deals($this);
         $this->activities = new Library\Activities($this);
         $this->notes      = new Library\Notes($this);
+        $this->dealFields = new Library\DealFields($this);
     }
 
     /**
@@ -150,10 +156,20 @@ class Pipedrive
     /**
      * Returns the Pipedrive Notes Object
      *
-     * @return Activities Object
+     * @return Notes Object
      */
     public function notes()
     {
         return $this->notes;
+    }
+
+    /**
+     * Returns the Pipedrive DealFields Object
+     *
+     * @return Activities Object
+     */
+    public function dealFields()
+    {
+        return $this->dealFields;
     }
 }
