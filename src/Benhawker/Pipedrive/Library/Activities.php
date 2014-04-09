@@ -1,5 +1,7 @@
 <?php namespace Benhawker\Pipedrive\Library;
 
+use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
+
 /**
  * Pipedrive Activities Methods
  *
