@@ -64,11 +64,11 @@ class Curl
      * @param  string $method Pipedrive method
      * @return array  decoded Json Output
      */
-    public function get($method)
+    public function get($method, array $data = array())
     {
         //set cURL transfer option for get request
         // and get ouput
-        return $this->createEndPoint($method)
+        return $this->createEndPoint($method, $data)
                     ->setOpt(CURLOPT_CUSTOMREQUEST, 'GET')
                     ->setopt(CURLOPT_HTTPGET, true)
                     ->exec();
@@ -174,7 +174,7 @@ class Curl
      * @param  string $method Pipedrive method
      * @return object $this   Current Object
      */
-    protected function createEndPoint($method)
+    protected function createEndPoint($method, array $data = array())
     {
         //create array for api key
         $data['api_token'] = $this->apiKey;

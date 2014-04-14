@@ -32,6 +32,17 @@ class Deals
     }
 
     /**
+     * Returns a deal
+     *
+     * @param  int   $id pipedrive deals id
+     * @return array returns detials of a deal
+     */
+    public function getById($id)
+    {
+        return $this->curl->get('deals/' . $id);
+    }
+
+    /**
      * Adds a deal
      *
      * @param  array $data deal detials
@@ -45,6 +56,18 @@ class Deals
         }
 
         return $this->curl->post('deals', $data);
+    }
+
+    /**
+     * Updates a deal
+     *
+     * @param  int   $dealId pipedrives deal Id
+     * @param  array $data   new detials of deal
+     * @return array returns detials of a deal
+     */
+    public function update($dealId, array $data = array())
+    {
+        return $this->curl->put('deals' . $dealId, $data);
     }
 
     /**

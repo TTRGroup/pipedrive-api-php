@@ -39,6 +39,45 @@ class Persons
     }
 
     /**
+     * Returns a person / people
+     *
+     * @param  string $name pipedrive persons name
+     * @return array  returns detials of a person
+     */
+    public function getByName($name)
+    {
+        return $this->curl->get('persons/find', $name);
+    }
+
+    /**
+     * Lists deals associated with a person.
+     *
+     * @param  array $data (id, start, limit)
+     * @return array deals
+     */
+    public function deals(array $data)
+    {
+        //if there is no name set throw error as it is a required field
+        if (!isset($data['id'])) {
+            throw new PipedriveMissingFieldError('You must include the "id" of the person when getting deals');
+        }
+
+        return $this->curl->get('persons/' . $data['id'] . '/deals');
+    }
+
+    /**
+     * Updates a person
+     *
+     * @param  int   $personId pipedrives person Id
+     * @param  array $data     new detials of person
+     * @return array returns detials of a person
+     */
+    public function update($personId, array $data = array())
+    {
+        return $this->curl->put('persons' . $personId, $data);
+    }
+
+    /**
      * Adds a person
      *
      * @param  array $data persons detials
