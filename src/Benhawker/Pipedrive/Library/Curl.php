@@ -64,7 +64,7 @@ class Curl
      * @param  string $method Pipedrive method
      * @return array  decoded Json Output
      */
-    public function get($method, array $data = array())
+    public function get($method, $data = array())
     {
         //set cURL transfer option for get request
         // and get ouput
@@ -173,7 +173,7 @@ class Curl
      * @param  string $method Pipedrive method
      * @return object $this   Current Object
      */
-    protected function createEndPoint($method, array $data = array())
+    protected function createEndPoint($method, $data = array())
     {
         //create array for api key
         $data['api_token'] = $this->apiKey;
