@@ -138,7 +138,6 @@ class Curl
             //throw error
             throw new PipedriveHttpError('API call failed: ' . curl_error($this->curl));
         }
-
         //decode output
         $result = json_decode($response, true);
 
@@ -182,7 +181,6 @@ class Curl
         $endPoint = $this->url  . '/' . $method . '?' . http_build_query($data);
         //set API endpoint
         $this->setOpt(CURLOPT_URL, $endPoint);
-
         //return this object
         return $this;
     }
@@ -242,15 +240,13 @@ class Curl
      * @return string
      */
     private function httpBuildMultiQuery(array $data, $key = null)
-        {
+    {
             $query = array();
 
             if (empty($data)) {
                 return $key . '=';
             }
-
             $isArrayAssoc = $this->isArrayAssoc($data);
-
             // build
             foreach ($data as $k => $value) {
                 if (is_string($value) || is_numeric($value)) {
@@ -265,24 +261,24 @@ class Curl
             return implode('&', $query);
         }
 
-        /**
-         * From https://github.com/php-curl-class/php-curl-class
-         * @param  array  $array
-         * @return boolean
-         */
-        private function isArrayAssoc($array)
-        {
-            return (bool) count(array_filter(array_keys($array), 'is_string'));
-        }
+    /**
+     * From https://github.com/php-curl-class/php-curl-class
+     * @param  array   $array
+     * @return boolean
+     */
+    private function isArrayAssoc($array)
+    {
+        return (bool) count(array_filter(array_keys($array), 'is_string'));
+    }
 
-        /**
-         * From https://github.com/php-curl-class/php-curl-class
-         * @param  array  $array
-         * @return boolean
-         */
-        private function isArrayMultiDim($array)
-        {
-            if (!is_array($array)) return false;
-            return !(count($array) === count($array, COUNT_RECURSIVE));
-        }
+    /**
+     * From https://github.com/php-curl-class/php-curl-class
+     * @param  array   $array
+     * @return boolean
+     */
+    private function isArrayMultiDim($array)
+    {
+        if (!is_array($array)) return false;
+        return !(count($array) === count($array, COUNT_RECURSIVE));
+    }
 }
