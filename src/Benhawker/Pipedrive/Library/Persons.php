@@ -46,7 +46,7 @@ class Persons
      */
     public function getByName($name)
     {
-        return $this->curl->get('persons/find', $name);
+        return $this->curl->get('persons/find', array('term' => $name));
     }
 
     /**
