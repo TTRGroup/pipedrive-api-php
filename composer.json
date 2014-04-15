@@ -1,7 +1,7 @@
 {
     "name": "benhawker/pipedrive",
     "type": "library",
-    "version": "0.1",
+    "version": "0.1.1",
     "description": "API client library for the Pipedrive CRM",
     "keywords": ["crm", "api"],
     "homepage": "",
