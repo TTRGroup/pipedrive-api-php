@@ -74,7 +74,7 @@ class Persons
      */
     public function update($personId, array $data = array())
     {
-        return $this->curl->put('persons' . $personId, $data);
+        return $this->curl->put('persons/' . $personId, $data);
     }
 
     /**
