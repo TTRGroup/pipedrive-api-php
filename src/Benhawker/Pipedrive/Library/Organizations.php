@@ -1,16 +1,14 @@
 <?php namespace Benhawker\Pipedrive\Library;
 
-use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
-
 /**
- * Pipedrive Persons Methods
+ * Pipedrive Organizations Methods
  *
- * Persons are your contacts, the customers you are doing Deals with.
- * Each Person can belong to an Organization.
- * Persons should not be confused with Users.
+ * Organizations are companies and other kinds of organizations you are making
+ * Deals with. Persons can be associated with organizations so that each
+ * organization can contain one or more Persons.
  *
  */
-class Persons
+class Organizations
 {
     /**
      * Hold the pipedrive cURL session
@@ -28,27 +26,27 @@ class Persons
      */
     public function __construct(\Benhawker\Pipedrive\Pipedrive $master)
     {
-        //associate curl class
+        // associate curl class
         $this->curl = $master->curl();
     }
 
     /**
-     * Returns a person
+     * Returns an organization
      *
-     * @param  int   $id pipedrive persons id
-     * @return array returns detials of a person
+     * @param  int   $id pipedrive organizations id
+     * @return array returns detials of a organization
      */
     public function getById($id)
     {
-        return $this->curl->get('persons/' . $id);
+        return $this->curl->get('organizations/' . $id);
     }
 
     /**
-     * Returns a person / people
+     * Returns an organization
      *
-     * @param  string $name pipedrive persons name
-     * @param  array  $data (org_id, start, limit, search_by_email)
-     * @return array  returns detials of a person
+     * @param  string $name pipedrive organizations name
+     * @param  array  $data (start, limit)
+     * @return array  returns detials of a organization
      */
     public function getByName($name, array $data = array())
     {
@@ -58,21 +56,21 @@ class Persons
 
         $data['term'] = $name;
 
-        return $this->curl->get('persons/find', $data);
+        return $this->curl->get('organizations/find', $data);
     }
 
     /**
-     * Returns a person / people without pagination
+     * Returns an organization without pagination
      *
-     * @param  string $name pipedrive persons name
-     * @param  array  $data (org_id, start, limit, search_by_email)
-     * @return array  returns detials of a person
+     * @param  string $name pipedrive organizations name
+     * @param  array  $data (start, limit)
+     * @return array  returns detials of a organization
      */
     private function getByNameNoPagination($name, array $data = array())
     {
         $data['term'] = $name;
 
-        $response = $this->curl->get('persons/find', $data);
+        $response = $this->curl->get('organizations/find', $data);
 
         if ($response['success'] && $response['data']) {
             array_push($this->response, $response['data']);
@@ -91,10 +89,10 @@ class Persons
     }
 
     /**
-     * Returns all persons
+     * Returns all organizations
      *
      * @param  array $data (filter_id, start, limit, sort_by, sort_mode)
-     * @return array returns detials of all products
+     * @return array returns detials of all organizations
      */
     public function getAll(array $data = array())
     {
@@ -102,18 +100,18 @@ class Persons
           return $this->getAllNoPagination($data);
         }
 
-        return $this->curl->get('persons/', $data);
+        return $this->curl->get('organizations/', $data);
     }
 
     /**
-     * Returns all persons without pagination
+     * Returns all organizations without pagination
      *
      * @param  array $data (filter_id, start, limit, sort_by, sort_mode)
-     * @return array returns detials of all products
+     * @return array returns detials of all organizations
      */
     private function getAllNoPagination(array $data = array())
     {
-        $response = $this->curl->get('persons/', $data);
+        $response = $this->curl->get('organizations/', $data);
 
         if ($response['success'] && $response['data']) {
             array_push($this->response, $response['data']);
@@ -132,46 +130,30 @@ class Persons
     }
 
     /**
-     * Lists deals associated with a person.
+     * Updates an organization
      *
-     * @param  array $data (id, start, limit)
-     * @return array deals
+     * @param  int   $organizationId  pipedrives organization Id
+     * @param  array $data  new detials of organization
+     * @return array returns detials of a organization
      */
-    public function deals(array $data)
+    public function update($organizationId, array $data = array())
     {
-        //if there is no name set throw error as it is a required field
-        if (!isset($data['id'])) {
-            throw new PipedriveMissingFieldError('You must include the "id" of the person when getting deals');
-        }
-
-        return $this->curl->get('persons/' . $data['id'] . '/deals');
+        return $this->curl->put('organizations/' . $organizationId, $data);
     }
 
     /**
-     * Updates a person
+     * Adds a organization
      *
-     * @param  int   $personId pipedrives person Id
-     * @param  array $data     new detials of person
-     * @return array returns detials of a person
-     */
-    public function update($personId, array $data = array())
-    {
-        return $this->curl->put('persons/' . $personId, $data);
-    }
-
-    /**
-     * Adds a person
-     *
-     * @param  array $data persons detials
-     * @return array returns detials of a person
+     * @param  array $data organizations detials
+     * @return array returns detials of a organization
      */
     public function add(array $data)
     {
         //if there is no name set throw error as it is a required field
         if (!isset($data['name'])) {
-            throw new PipedriveMissingFieldError('You must include a "name" field when inserting a person');
+            throw new PipedriveMissingFieldError('You must include a "name" field when inserting an organization');
         }
 
-        return $this->curl->post('persons', $data);
+        return $this->curl->post('organizations', $data);
     }
 }

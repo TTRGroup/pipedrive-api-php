@@ -52,7 +52,7 @@ class Deals
     {
         //if there is no title set throw error as it is a required field
         if (!isset($data['title'])) {
-            throw new PipedriveMissingFieldError('You must include a "title" feild when inserting a deal');
+            throw new PipedriveMissingFieldError('You must include a "title" field when inserting a deal');
         }
 
         return $this->curl->post('deals', $data);
@@ -80,6 +80,31 @@ class Deals
     public function moveStage($dealId, $stageId)
     {
         return $this->curl->put('deals/' . $dealId, array('stage_id' => $stageId));
+    }
+
+    /**
+     * Adds a product to the deal
+     *
+     * @param  int   $dealId  deal id
+     * @param  array $data product detials
+     * @return array returns detials of the adding of a product
+     */
+    public function addProduct($dealId, array $data = array())
+    {
+        //if there is no product_id set throw error as it is a required field
+        if (!isset($data['product_id'])) {
+            throw new PipedriveMissingFieldError('You must include a "product_id" field when adding a product');
+        }
+        //if there is no item_price set throw error as it is a required field
+        if (!isset($data['item_price'])) {
+            throw new PipedriveMissingFieldError('You must include an "item_price" field when adding a product');
+        }
+        //if there is no amount set throw error as it is a required field
+        if (!isset($data['amount'])) {
+            throw new PipedriveMissingFieldError('You must include an "amount" field when adding a product');
+        }
+
+        return $this->curl->post('deals/' . $dealId . '/products', $data);
     }
 
 }
