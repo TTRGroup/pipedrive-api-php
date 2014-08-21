@@ -18,7 +18,7 @@ class Deals
 {
     /**
      * Hold the pipedrive cURL session
-     * @var Curl Object
+     * @var \Benhawker\Pipedrive\Library\Curl Curl Object
      */
     protected $curl;
 

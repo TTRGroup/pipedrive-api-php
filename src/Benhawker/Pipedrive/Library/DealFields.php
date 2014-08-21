@@ -20,7 +20,7 @@ class DealFields
 {
     /**
      * Hold the pipedrive cURL session
-     * @var Curl Object
+     * @var \Benhawker\Pipedrive\Library\Curl Curl Object
      */
     protected $curl;
 
@@ -37,7 +37,7 @@ class DealFields
      * Adds a dealField
      *
      * @param  array $data deal field detials
-     * @return array returns detials of the deal field
+     * @return array returns details of the deal field
      */
     public function add(array $data)
     {
