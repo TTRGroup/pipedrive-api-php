@@ -82,6 +82,11 @@ class Pipedrive
      * @var Notes Object
      */
     protected $dealFields;
+    /**
+     * Placeholder attritube for the pipedrive organizations class
+     * @var Organizations Object
+     */
+    protected $organizations;
 
     /**
      * Set up API url and load library classes
@@ -106,11 +111,12 @@ class Pipedrive
         $this->curl = new Library\Curl($url, $apiKey);
 
         //add pipedrive classes to the assoicated property
-        $this->persons    = new Library\Persons($this);
-        $this->deals      = new Library\Deals($this);
-        $this->activities = new Library\Activities($this);
-        $this->notes      = new Library\Notes($this);
-        $this->dealFields = new Library\DealFields($this);
+        $this->persons       = new Library\Persons($this);
+        $this->deals         = new Library\Deals($this);
+        $this->activities    = new Library\Activities($this);
+        $this->notes         = new Library\Notes($this);
+        $this->dealFields    = new Library\DealFields($this);
+        $this->organizations = new Library\Organizations($this);
     }
 
     /**
@@ -171,5 +177,15 @@ class Pipedrive
     public function dealFields()
     {
         return $this->dealFields;
+    }
+
+    /**
+     * Returns the Pipedrive Organizations Object
+     *
+     * @return Organizations Object
+     */
+    public function organizations()
+    {
+        return $this->organizations;
     }
 }

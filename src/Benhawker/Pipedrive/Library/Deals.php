@@ -43,6 +43,24 @@ class Deals
     }
 
     /**
+     * Returns a deal / deals
+     *
+     * @param  string $name pipedrive deals title
+     * @return array  returns detials of a deal
+     */
+    public function getByName($name, $personId=null, $orgId=null)
+    {
+        $params = array('term' => $name);
+        if($personId) {
+            $params['person_id'] = $personId;
+        }
+        if($orgId) {
+            $params['org_id'] = $orgId;
+        }
+        return $this->curl->get('deals/find', $params);
+    }
+
+    /**
      * Adds a deal
      *
      * @param  array $data deal detials
@@ -67,7 +85,7 @@ class Deals
      */
     public function update($dealId, array $data = array())
     {
-        return $this->curl->put('deals' . $dealId, $data);
+        return $this->curl->put('deals/' . $dealId, $data);
     }
 
     /**
