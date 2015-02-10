@@ -1,6 +1,6 @@
 <?php namespace Benhawker\Pipedrive;
 
-/**
+    /**
  * Pipedrive API wrapper class v0.1
  *
  * Author: Ben Hawker (ben@tickettoridegroup.com) 2014
@@ -54,32 +54,32 @@ class Pipedrive
     protected $version;
     /**
      * Hold the Curl Object
-     * @var Curl Object
+     * @var \Benhawker\Pipedrive\Library\Curl Curl Object
      */
     protected $curl;
     /**
      * Placeholder attritube for the pipedrive persons class
-     * @var Persons Object
+     * @var \Benhawker\Pipedrive\Library\Persons Persons Object
      */
     protected $persons;
     /**
      * Placeholder attritube for the pipedrive deals class
-     * @var Deals Object
+     * @var \Benhawker\Pipedrive\Library\Deals Deals Object
      */
     protected $deals;
     /**
      * Placeholder attritube for the pipedrive activities class
-     * @var Activities Object
+     * @var \Benhawker\Pipedrive\Library\Activities Activities Object
      */
     protected $activities;
     /**
      * Placeholder attritube for the pipedrive notes class
-     * @var Notes Object
+     * @var \Benhawker\Pipedrive\Library\Notes Notes Object
      */
     protected $notes;
     /**
      * Placeholder attritube for the pipedrive dealFields class
-     * @var Notes Object
+     * @var \Benhawker\Pipedrive\Library\DealFields DealFields Object
      */
     protected $dealFields;
     /**
@@ -122,7 +122,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive cURL Session
      *
-     * @return Curl Object
+     * @return \Benhawker\Pipedrive\Library\Curl
      */
     public function curl()
     {
@@ -132,7 +132,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Persons Object
      *
-     * @return Persons Object
+     * @return \Benhawker\Pipedrive\Library\Persons
      */
     public function persons()
     {
@@ -142,7 +142,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Deals Object
      *
-     * @return Deals Object
+     * @return \Benhawker\Pipedrive\Library\Deals
      */
     public function deals()
     {
@@ -152,7 +152,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Activities Object
      *
-     * @return Activities Object
+     * @return \Benhawker\Pipedrive\Library\Activities
      */
     public function activities()
     {
@@ -162,7 +162,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Notes Object
      *
-     * @return Notes Object
+     * @return \Benhawker\Pipedrive\Library\Notes
      */
     public function notes()
     {
@@ -172,7 +172,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive DealFields Object
      *
-     * @return Activities Object
+     * @return \Benhawker\Pipedrive\Library\DealFields
      */
     public function dealFields()
     {

@@ -25,7 +25,7 @@ class Curl
     protected $url;
     /**
      * Client URL Library
-     * @var curl session
+     * @var resource curl session
      */
     public $curl;
 
@@ -156,7 +156,7 @@ class Curl
      * @param string $option option
      * @param string $value  value
      *
-     * @return object $this this object
+     * @return $this this object
      */
     protected function setOpt($option, $value)
     {
@@ -171,7 +171,7 @@ class Curl
      * by adding the method and API key
      *
      * @param  string $method Pipedrive method
-     * @return object $this   Current Object
+     * @return $this Current Object
      */
     protected function createEndPoint($method, $data = array())
     {
