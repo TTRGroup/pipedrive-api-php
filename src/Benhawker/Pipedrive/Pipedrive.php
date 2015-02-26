@@ -122,7 +122,7 @@ class Pipedrive
         $this->notes         = new Library\Notes($this);
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
-        $this->products      = new Library\Prodcuts($this);
+        $this->products      = new Library\Products($this);
     }
 
     /**
