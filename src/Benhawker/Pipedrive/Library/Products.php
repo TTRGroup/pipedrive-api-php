@@ -13,7 +13,7 @@ use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
  * Products can be instantiated to Deals. In the context of instatiation,
  * a custom price, quantity, duration and discount can be applied.
  */
-class Deals
+class Products
 {
     /**
      * Hold the pipedrive cURL session
