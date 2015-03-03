@@ -61,6 +61,22 @@ class Deals
     }
 
     /**
+     * Lists products associated with a deal.
+     *
+     * @param  array $data (id, start, limit)
+     * @return array products
+     */
+    public function products(array $data)
+    {
+        //if there is no id set throw error as it is a required field
+        if (!isset($data['id'])) {
+            throw new PipedriveMissingFieldError('You must include the "id" of the deal when getting products');
+        }
+
+        return $this->curl->get('deals/' . $data['id'] . '/products');
+    }
+
+    /**
      * Adds a deal
      *
      * @param  array $data deal detials
