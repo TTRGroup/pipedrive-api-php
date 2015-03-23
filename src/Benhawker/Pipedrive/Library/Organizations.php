@@ -17,7 +17,7 @@ class Organizations
      * @var Curl Object
      */
     protected $curl;
-
+    
     /**
      * Initialise the object load master class
      */
@@ -38,17 +38,31 @@ class Organizations
         return $this->curl->get('organizations/' . $id);
     }
 
-    /**
-     * Returns an organization (or a list of organizations)
+	/**
+     * Returns an organization
      *
      * @param  string $name pipedrive organizations name
+     * @param  array  $data (start, limit)
      * @return array  returns detials of a organization
      */
-    public function getByName($name)
+    public function getByName($name, array $data = array())
     {
-        return $this->curl->get('organizations/find', array('term' => $name));
+        $data['term'] = $name;
+        return $this->curl->get('organizations/find', $data);
     }
-
+    
+      
+    /**
+     * Returns all organizations
+     *
+     * @param  array $data (filter_id, start, limit, sort_by, sort_mode)
+     * @return array returns detials of all organizations
+     */
+    public function getAll(array $data = array())
+    {
+        return $this->curl->get('organizations/', $data);
+    }
+    
     /**
      * Lists deals associated with a organization.
      *
@@ -61,7 +75,6 @@ class Organizations
         if (!isset($data['id'])) {
             throw new PipedriveMissingFieldError('You must include the "id" of the organization when getting deals');
         }
-
         return $this->curl->get('organizations/' . $data['id'] . '/deals');
     }
 
@@ -87,7 +100,7 @@ class Organizations
     {
         //if there is no name set throw error as it is a required field
         if (!isset($data['name'])) {
-            throw new PipedriveMissingFieldError('You must include a "name" feild when inserting a organization');
+            throw new PipedriveMissingFieldError('You must include a "name" field when inserting a organization');
         }
 
         return $this->curl->post('organizations', $data);

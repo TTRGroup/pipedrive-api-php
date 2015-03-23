@@ -43,7 +43,7 @@ class DealFields
     {
         //if there is no name set throw error as it is a required field
         if (!isset($data['name'])) {
-            throw new PipedriveMissingFieldError('You must include a "name" feild when inserting a dealField');
+            throw new PipedriveMissingFieldError('You must include a "name" field when inserting a dealField');
         }
 
         return $this->curl->post('dealFields', $data);
