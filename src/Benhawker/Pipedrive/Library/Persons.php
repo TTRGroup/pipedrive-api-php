@@ -57,12 +57,28 @@ class Persons
      */
     public function deals(array $data)
     {
-        //if there is no name set throw error as it is a required field
+        //if there is no id set throw error as it is a required field
         if (!isset($data['id'])) {
             throw new PipedriveMissingFieldError('You must include the "id" of the person when getting deals');
         }
 
         return $this->curl->get('persons/' . $data['id'] . '/deals');
+    }
+
+    /**
+     * Lists products associated with a person.
+     *
+     * @param  array $data (id, start, limit)
+     * @return array products
+     */
+    public function products(array $data)
+    {
+        //if there is no id set throw error as it is a required field
+        if (!isset($data['id'])) {
+            throw new PipedriveMissingFieldError('You must include the "id" of the person when getting products');
+        }
+
+        return $this->curl->get('persons/' . $data['id'] . '/products');
     }
 
     /**

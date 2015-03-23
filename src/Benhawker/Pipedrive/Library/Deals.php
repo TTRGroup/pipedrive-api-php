@@ -61,6 +61,22 @@ class Deals
     }
 
     /**
+     * Lists products associated with a deal.
+     *
+     * @param  array $data (id, start, limit)
+     * @return array products
+     */
+    public function products(array $data)
+    {
+        //if there is no id set throw error as it is a required field
+        if (!isset($data['id'])) {
+            throw new PipedriveMissingFieldError('You must include the "id" of the deal when getting products');
+        }
+
+        return $this->curl->get('deals/' . $data['id'] . '/products');
+    }
+
+    /**
      * Adds a deal
      *
      * @param  array $data deal detials
@@ -74,6 +90,30 @@ class Deals
         }
 
         return $this->curl->post('deals', $data);
+    }
+
+    /**
+     * Adds a product to a deal
+     *
+     * @param  array $data deal and product detials
+     * @return array returns detials of the deal-product
+     */
+    public function addProduct($dealId, array $data)
+    {
+        //if there is no product_id set throw error as it is a required field
+        if (!isset($data['product_id'])) {
+            throw new PipedriveMissingFieldError('You must include a "pdoruct_id" field when adding a product to a deal');
+        }
+        //if there is no item_price set throw error as it is a required field
+        if (!isset($data['item_price'])) {
+            throw new PipedriveMissingFieldError('You must include a "item_price" field when adding a product to a deal');
+        }
+        //if there is no quantity set throw error as it is a required field
+        if (!isset($data['quantity'])) {
+            throw new PipedriveMissingFieldError('You must include a "quantity" field when adding a product to a deal');
+        }
+
+        return $this->curl->post('deals/' . $dealId . '/products', $data);
     }
 
     /**
