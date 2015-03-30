@@ -105,4 +105,15 @@ class Organizations
 
         return $this->curl->post('organizations', $data);
     }
+
+    /**
+     * Deletes an organization
+     *
+     * @param  int   $organizationId pipedrives organization Id
+     * @return array returns detials of a organization
+     */
+    public function delete($organizationId)
+    {
+        return $this->curl->delete('organizations/' . $organizationId);
+    }
 }
