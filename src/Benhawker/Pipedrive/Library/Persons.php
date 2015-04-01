@@ -103,7 +103,7 @@ class Persons
     {
         //if there is no name set throw error as it is a required field
         if (!isset($data['name'])) {
-            throw new PipedriveMissingFieldError('You must include a "name" feild when inserting a person');
+            throw new PipedriveMissingFieldError('You must include a "name" field when inserting a person');
         }
 
         return $this->curl->post('persons', $data);
