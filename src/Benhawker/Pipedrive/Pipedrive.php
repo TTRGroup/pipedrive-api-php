@@ -147,6 +147,16 @@ class Pipedrive
     }
 
     /**
+     * Returns the Pipedrive personFields Object
+     *
+     * @return \Benhawker\Pipedrive\Library\PersonFields
+     */
+    public function personFields()
+    {
+        return $this->personFields;
+    }
+
+    /**
      * Returns the Pipedrive Deals Object
      *
      * @return \Benhawker\Pipedrive\Library\Deals
