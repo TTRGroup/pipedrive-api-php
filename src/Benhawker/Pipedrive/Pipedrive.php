@@ -117,6 +117,7 @@ class Pipedrive
 
         //add pipedrive classes to the assoicated property
         $this->persons       = new Library\Persons($this);
+        $this->personFields  = new Library\PersonFields($this);
         $this->deals         = new Library\Deals($this);
         $this->activities    = new Library\Activities($this);
         $this->notes         = new Library\Notes($this);
