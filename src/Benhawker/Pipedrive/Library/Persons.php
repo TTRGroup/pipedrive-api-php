@@ -113,7 +113,7 @@ class Persons
      * Deletes a person
      *
      * @param  int   $personId pipedrives person Id
-     * @return array returns detials of a person
+     * @return array returns details of a person
      */
     public function delete($personId)
     {
