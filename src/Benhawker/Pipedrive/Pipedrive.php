@@ -62,6 +62,13 @@ class Pipedrive
      * @var \Benhawker\Pipedrive\Library\Persons Persons Object
      */
     protected $persons;
+
+    /**
+     * Placeholder attritube for the pipedrive personFields class
+     * @var \Benhawker\Pipedrive\Library\PersonField Object
+     */
+    protected $personFields;
+
     /**
      * Placeholder attritube for the pipedrive deals class
      * @var \Benhawker\Pipedrive\Library\Deals Deals Object
