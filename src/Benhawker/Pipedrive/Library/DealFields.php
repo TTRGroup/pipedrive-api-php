@@ -34,6 +34,27 @@ class DealFields
     }
 
     /**
+     * Returns all deal fields
+     *
+     * @return array returns all dealFields
+     */
+    public function getAll()
+    {
+        return $this->curl->get('dealFields');
+    }
+    
+    /**
+     * Returns a deal field
+     *
+     * @param  int   $id pipedrive dealField id
+     * @return array returns details of a dealField
+     */
+    public function getById($id)
+    {
+        return $this->curl->get('dealFields/' . $id);
+    }
+
+    /**
      * Adds a dealField
      *
      * @param  array $data deal field detials
