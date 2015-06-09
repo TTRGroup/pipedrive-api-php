@@ -7,7 +7,7 @@
  * of Deals. In the context of the Pipeline a stage belongs to, it has an order number which 
  * defines the order of stages in that Pipeline.
  */
-class Stage 
+class Stages 
 {
     /**
      * Hold the pipedrive cURL session
