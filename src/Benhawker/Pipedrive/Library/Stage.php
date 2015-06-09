@@ -24,7 +24,28 @@ class Stage
         $this->curl = $master->curl();
     }
 
-    public function getDeals($data) {
+    /**
+     * Returns all stages on the system.
+     *
+     * @param int $pipeline
+     * @return array stages
+     */
+    public function getAll($pipeline = null) {
+        $data = array();
+        if (!empty($pipeline)) {
+            $data['pipeline_id'] = $pipeline;
+        }
+
+        return $this->curl->get("stages", $data);
+    }
+
+    /**
+     * Lists deals associated with a stage.
+     *
+     * @param  array $data (id, start, limit, everyone)
+     * @return array deals
+     */
+    public function deals($data) {
         //if there is no id set throw error as it is a required field
         if (!isset($data['id'])) {
             throw new PipedriveMissingFieldError('You must include the "id" of the stage when getting deals');
@@ -32,6 +53,6 @@ class Stage
         $stageId = intval($data['id']);
         unset($data['id']);
 
-        $this->curl->get("stage/" . $stageId . "/deals", $data);
+        return $this->curl->get("stage/" . $stageId . "/deals", $data);
     }
 }
