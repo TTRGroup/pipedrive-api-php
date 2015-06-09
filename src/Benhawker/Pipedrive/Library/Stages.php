@@ -53,6 +53,6 @@ class Stages
         $stageId = intval($data['id']);
         unset($data['id']);
 
-        return $this->curl->get("stage/" . $stageId . "/deals", $data);
+        return $this->curl->get("stages/" . $stageId . "/deals", $data);
     }
 }
