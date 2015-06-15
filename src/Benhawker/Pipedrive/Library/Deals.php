@@ -77,6 +77,20 @@ class Deals
     }
 
     /**
+     * Retrieves deals matching the timeline criteria provided in the data parameter.
+     * 
+     * @param array $data (start_date, interval, amount, field_key)
+     * @return array deals
+     **/
+    public function timeline($data) {
+        if (!isset($data['start_date']) || !isset($data['interval']) || !isset($data['amount']) || !isset($data['field_key'])) {
+            throw new PipedriveMissingFieldError('You must include the start_date, interval, amound and field_key when getting deals via timeline.');
+        }
+
+        return $this->curl->get('deals/timeline/', $data);
+    }
+
+    /**
      * Adds a deal
      *
      * @param  array $data deal detials
