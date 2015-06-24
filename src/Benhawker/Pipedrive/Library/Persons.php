@@ -31,7 +31,7 @@ class Persons
      * Returns a person
      *
      * @param  int   $id pipedrive persons id
-     * @return array returns detials of a person
+     * @return array returns details of a person
      */
     public function getById($id)
     {
@@ -42,11 +42,22 @@ class Persons
      * Returns a person / people
      *
      * @param  string $name pipedrive persons name
-     * @return array  returns detials of a person
+     * @return array  returns details of a person
      */
     public function getByName($name)
     {
         return $this->curl->get('persons/find', array('term' => $name));
+    }
+
+    /**
+     * Returns a person / people
+     *
+     * @param  string $email pipedrive persons email
+     * @return array  returns details of a person
+     */
+    public function getByEmail($email)
+    {
+        return $this->curl->get('persons/find', array('term' => $email, 'search_by_email' => 1));
     }
 
     /**
