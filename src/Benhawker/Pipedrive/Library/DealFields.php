@@ -42,7 +42,7 @@ class DealFields
     {
         return $this->curl->get('dealFields');
     }
-
+    
     /**
      * Returns a deal field
      *
@@ -69,4 +69,5 @@ class DealFields
 
         return $this->curl->post('dealFields', $data);
     }
+
 }
