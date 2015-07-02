@@ -32,8 +32,9 @@ class Activities
     /**
      * Adds a activity
      *
-     * @param  array $data activity detials
-     * @return array returns detials of the activity
+     * @param  array $data activity details
+     * @return array returns details of the activity
+     * @throws PipedriveMissingFieldError
      */
     public function add(array $data)
     {
@@ -44,5 +45,17 @@ class Activities
         }
 
         return $this->curl->post('activities', $data);
+    }
+
+
+    /**
+     * Return activity
+     *
+     * @param  int   $id pipedrive activity id
+     * @return array returns details of activity
+     */
+    public function getById($id)
+    {
+        return $this->curl->get('activities/' . $id);
     }
 }
