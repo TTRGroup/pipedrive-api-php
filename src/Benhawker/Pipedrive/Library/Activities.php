@@ -58,4 +58,13 @@ class Activities
     {
         return $this->curl->get('activities/' . $id);
     }
+
+    /**
+     * @param array $data
+     * @return array returns all activities by data fields
+     */
+    public function getByUser(array $data)
+    {
+        return $this->curl->get('activities', $data);
+    }
 }
