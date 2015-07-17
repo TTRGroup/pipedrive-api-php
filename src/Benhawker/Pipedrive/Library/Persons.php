@@ -50,6 +50,18 @@ class Persons
     }
 
     /**
+    +     * Returns a person / people
+    +     *
+    +     * @param  string $email pipedrive persons email
+    +     * @return array  returns details of a person
+    +     */
+    public function getByEmail($email)
+    {
+        return $this->curl->get('persons/find', array('term' => $email, 'search_by_email' => 1));
+    }
+
+
+    /**
      * Lists deals associated with a person.
      *
      * @param  array $data (id, start, limit)
