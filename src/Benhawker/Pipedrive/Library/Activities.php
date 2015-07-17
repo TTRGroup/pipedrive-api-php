@@ -47,6 +47,14 @@ class Activities
         return $this->curl->post('activities', $data);
     }
 
+    /**
+     * @param $id
+     * @return array returns deleted id
+     */
+    public function delete($id){
+        return $this->curl->delete('activities/'.$id);
+    }
+
 
     /**
      * Return activity
