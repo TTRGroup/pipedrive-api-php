@@ -31,10 +31,10 @@ class Products
     }
 
     /**
-     * Returns a product / products
+     * Find products by name
      *
-     * @param  string $name pipedrive prodeuct name
-     * @return array  returns details of a product
+     * @param  string $name search term to look for, minimum 3 characters
+     * @return array  found products
      */
     public function getByName($name)
     {

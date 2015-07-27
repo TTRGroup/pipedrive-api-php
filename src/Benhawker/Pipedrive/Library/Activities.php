@@ -30,10 +30,10 @@ class Activities
     }
 
     /**
-     * Adds a activity
+     * Adds an activity
      *
-     * @param  array $data activity details
-     * @return array returns details of the activity
+     * @param  array $data details of the activity
+     * @return array details of the activity
      */
     public function add(array $data)
     {
