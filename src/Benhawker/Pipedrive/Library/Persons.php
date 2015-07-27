@@ -30,19 +30,19 @@ class Persons
     /**
      * Returns a person
      *
-     * @param  int   $id pipedrive persons id
-     * @return array returns detials of a person
+     * @param  int   $id ID of the person
+     * @return array details of the person
      */
-    public function getById($id)
+    public function getById($personId)
     {
-        return $this->curl->get('persons/' . $id);
+        return $this->curl->get('persons/' . $personId);
     }
 
     /**
-     * Returns a person / people
+     * Find persons by their name
      *
-     * @param  string $name pipedrive persons name
-     * @return array  returns detials of a person
+     * @param  string $name Search term to look for
+     * @return array  found persons
      */
     public function getByName($name)
     {
@@ -53,7 +53,7 @@ class Persons
      * Lists deals associated with a person.
      *
      * @param  array $data (id, start, limit)
-     * @return array deals
+     * @return array associated deals
      */
     public function deals(array $data)
     {
@@ -69,7 +69,7 @@ class Persons
      * Lists products associated with a person.
      *
      * @param  array $data (id, start, limit)
-     * @return array products
+     * @return array associated products
      */
     public function products(array $data)
     {
@@ -84,9 +84,9 @@ class Persons
     /**
      * Updates a person
      *
-     * @param  int   $personId pipedrives person Id
-     * @param  array $data     new detials of person
-     * @return array returns detials of a person
+     * @param  int   $personId ID of the person
+     * @param  array $data     new details for the person
+     * @return array details of the person
      */
     public function update($personId, array $data = array())
     {
@@ -96,8 +96,8 @@ class Persons
     /**
      * Adds a person
      *
-     * @param  array $data persons detials
-     * @return array returns detials of a person
+     * @param  array $data details for the person
+     * @return array details of the person
      */
     public function add(array $data)
     {
@@ -112,8 +112,8 @@ class Persons
     /**
      * Deletes a person
      *
-     * @param  int   $personId pipedrives person Id
-     * @return array returns detials of a person
+     * @param  int   $personId ID of the person
+     * @return array details of the person
      */
     public function delete($personId)
     {
