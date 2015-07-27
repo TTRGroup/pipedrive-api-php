@@ -104,7 +104,7 @@ class Deals
     {
         //if there is no product_id set throw error as it is a required field
         if (!isset($data['product_id'])) {
-            throw new PipedriveMissingFieldError('You must include a "pdoruct_id" field when adding a product to a deal');
+            throw new PipedriveMissingFieldError('You must include a "product_id" field when adding a product to a deal');
         }
         //if there is no item_price set throw error as it is a required field
         if (!isset($data['item_price'])) {
