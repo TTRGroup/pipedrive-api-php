@@ -1,6 +1,6 @@
 <?php namespace Benhawker\Pipedrive;
 
-    /**
+/**
  * Pipedrive API wrapper class v0.1
  *
  * Author: Ben Hawker (ben@tickettoridegroup.com) 2014
@@ -84,12 +84,12 @@ class Pipedrive
     protected $dealFields;
     /**
      * Placeholder attritube for the pipedrive organizations class
-     * @var Organizations Object
+     * @var \Benhawker\Pipedrive\Library\Organizations Organizations Object
      */
     protected $organizations;
     /**
      * Placeholder attritube for the pipedrive products class
-     * @var Products Object
+     * @var \Benhawker\Pipedrive\Library\Products Products Object
      */
     protected $products;
 
@@ -188,7 +188,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Organizations Object
      *
-     * @return Organizations Object
+     * @return \Benhawker\Pipedrive\Library\Organizations
      */
     public function organizations()
     {
@@ -198,7 +198,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Products Object
      *
-     * @return Products Object
+     * @return \Benhawker\Pipedrive\Library\Products
      */
     public function products()
     {

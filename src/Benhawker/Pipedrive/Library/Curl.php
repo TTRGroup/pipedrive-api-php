@@ -62,7 +62,7 @@ class Curl
      * Makes cURL get Request
      *
      * @param  string $method Pipedrive method
-     * @return array  decoded Json Output
+     * @return array  decoded JSON Output
      */
     public function get($method, $data = array())
     {
@@ -78,7 +78,7 @@ class Curl
      * Makes cURL get Request
      *
      * @param  string $method Pipedrive method
-     * @return array  decoded Json Output
+     * @return array  decoded JSON Output
      */
     public function post($method, array $data)
     {
@@ -95,7 +95,7 @@ class Curl
      * Makes cURL get Request
      *
      * @param  string $method Pipedrive method
-     * @return array  decoded Json Output
+     * @return array  decoded JSON Output
      */
     public function put($method, array $data)
     {
@@ -111,7 +111,7 @@ class Curl
      * Makes cURL get Request
      *
      * @param  string $method Pipedrive method
-     * @return array  decoded Json Output
+     * @return array  decoded JSON Output
      */
     public function delete($method)
     {
@@ -125,7 +125,7 @@ class Curl
     /**
      * Execute current cURL session
      *
-     * @return array decoded json ouput
+     * @return array decoded JSON ouput
      */
     protected function exec()
     {
