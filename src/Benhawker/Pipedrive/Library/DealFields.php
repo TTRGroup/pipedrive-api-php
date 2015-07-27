@@ -3,7 +3,7 @@
 use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
 
 /**
- * Pipedrive Deals Methods
+ * Pipedrive DealFields Methods
  *
  * DealFields represent the near-complete schema for a Deal in the context of the company of the authorized user.
  * Each company can have a different schema for their Deals, with various custom fields. In the context of using
@@ -34,9 +34,9 @@ class DealFields
     }
 
     /**
-     * Returns all deal fields
+     * Returns all dealFields
      *
-     * @return array returns all dealFields
+     * @return array all dealFields
      */
     public function getAll()
     {
@@ -44,21 +44,21 @@ class DealFields
     }
     
     /**
-     * Returns a deal field
+     * Returns a dealField
      *
-     * @param  int   $id pipedrive dealField id
-     * @return array returns details of a dealField
+     * @param  int   $id ID of the field to fetch
+     * @return array details of the dealField
      */
-    public function getById($id)
+    public function getById($dealFieldId)
     {
-        return $this->curl->get('dealFields/' . $id);
+        return $this->curl->get('dealFields/' . $dealFieldId);
     }
 
     /**
      * Adds a dealField
      *
-     * @param  array $data deal field details
-     * @return array returns details of the deal field
+     * @param  array $data details of the dealField
+     * @return array details of the dealField
      */
     public function add(array $data)
     {
