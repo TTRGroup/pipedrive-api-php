@@ -28,22 +28,22 @@ class Organizations
     }
 
     /**
-     * Returns a organization
+     * Returns an organization
      *
-     * @param  int   $id pipedrive organizations id
-     * @return array returns details of a organization
+     * @param  int   $organizationId ID of the organization
+     * @return array details of the organization
      */
-    public function getById($id)
+    public function getById($organizationId)
     {
-        return $this->curl->get('organizations/' . $id);
+        return $this->curl->get('organizations/' . $organizationId);
     }
 
 	/**
-     * Returns an organization
+     * Find organizations by name
      *
-     * @param  string $name pipedrive organizations name
+     * @param  string $name search term to look for
      * @param  array  $data (start, limit)
-     * @return array  returns details of a organization
+     * @return array  found organizations
      */
     public function getByName($name, array $data = array())
     {
@@ -56,7 +56,7 @@ class Organizations
      * Returns all organizations
      *
      * @param  array $data (filter_id, start, limit, sort_by, sort_mode)
-     * @return array returns details of all organizations
+     * @return array all organizations
      */
     public function getAll(array $data = array())
     {
@@ -64,10 +64,10 @@ class Organizations
     }
     
     /**
-     * Lists deals associated with a organization.
+     * Lists deals associated with an organization.
      *
      * @param  array $data (id, start, limit)
-     * @return array deals
+     * @return array associated deals
      */
     public function deals(array $data)
     {
@@ -81,9 +81,9 @@ class Organizations
     /**
      * Updates an organization
      *
-     * @param  int   $organizationId pipedrives organization Id
-     * @param  array $data     new details of organization
-     * @return array returns details of a organization
+     * @param  int   $organizationId ID of the organization
+     * @param  array $data     new details for the organization
+     * @return array details of the organization
      */
     public function update($organizationId, array $data = array())
     {
@@ -91,16 +91,16 @@ class Organizations
     }
 
     /**
-     * Adds a organization
+     * Adds a new organization
      *
-     * @param  array $data organizations details
-     * @return array returns details of a organization
+     * @param  array $data details of the organization
+     * @return array details of the organization
      */
     public function add(array $data)
     {
         //if there is no name set throw error as it is a required field
         if (!isset($data['name'])) {
-            throw new PipedriveMissingFieldError('You must include a "name" field when inserting a organization');
+            throw new PipedriveMissingFieldError('You must include a "name" field when inserting an organization');
         }
 
         return $this->curl->post('organizations', $data);
@@ -109,8 +109,8 @@ class Organizations
     /**
      * Deletes an organization
      *
-     * @param  int   $organizationId pipedrives organization Id
-     * @return array returns details of a organization
+     * @param  int   $organizationId ID of the organization
+     * @return array details of the organization
      */
     public function delete($organizationId)
     {
