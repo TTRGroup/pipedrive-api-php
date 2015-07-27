@@ -142,4 +142,28 @@ class Deals
         return $this->curl->put('deals/' . $dealId, array('stage_id' => $stageId));
     }
 
+    /**
+     * Delete single deal by deal id
+     *
+     * @param $dealId
+     * @return array
+     */
+
+    public function delete($dealId)
+    {
+        return $this->curl->delete('deals/'.$dealId);
+    }
+
+
+    /**
+     * Bulk delete deals
+     *
+     * @param $ids comma separated ids
+     * @return mixed
+     */
+    public function bulkDelete($ids)
+    {
+        return $this->curl->bulkDelete('deals', array('ids' => $ids));
+    }
+
 }

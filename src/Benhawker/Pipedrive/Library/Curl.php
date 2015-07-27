@@ -122,6 +122,26 @@ class Curl
                     ->exec();
     }
 
+
+    /**
+     * Bulk delete request
+     *
+     * @param $method
+     * @param array $data
+     * @return array
+     * @throws PipedriveApiError
+     * @throws PipedriveHttpError
+     */
+    public function bulkDelete($method, array $data)
+    {
+
+        return $this->createEndPoint($method)
+            ->setOpt(CURLOPT_CUSTOMREQUEST, 'DELETE')
+            ->setOpt(CURLOPT_POSTFIELDS, http_build_query($data))
+            ->exec();
+
+    }
+
     /**
      * Execute current cURL session
      *
