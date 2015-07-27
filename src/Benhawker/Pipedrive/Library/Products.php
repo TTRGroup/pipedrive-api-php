@@ -34,7 +34,7 @@ class Products
      * Returns a product / products
      *
      * @param  string $name pipedrive prodeuct name
-     * @return array  returns detials of a product
+     * @return array  returns details of a product
      */
     public function getByName($name)
     {

@@ -31,8 +31,8 @@ class Notes
     /**
      * Adds a note
      *
-     * @param  array $data note detials
-     * @return array returns detials of the note
+     * @param  array $data note details
+     * @return array returns details of the note
      */
     public function add(array $data)
     {

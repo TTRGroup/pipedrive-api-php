@@ -31,7 +31,7 @@ class Organizations
      * Returns a organization
      *
      * @param  int   $id pipedrive organizations id
-     * @return array returns detials of a organization
+     * @return array returns details of a organization
      */
     public function getById($id)
     {
@@ -43,7 +43,7 @@ class Organizations
      *
      * @param  string $name pipedrive organizations name
      * @param  array  $data (start, limit)
-     * @return array  returns detials of a organization
+     * @return array  returns details of a organization
      */
     public function getByName($name, array $data = array())
     {
@@ -56,7 +56,7 @@ class Organizations
      * Returns all organizations
      *
      * @param  array $data (filter_id, start, limit, sort_by, sort_mode)
-     * @return array returns detials of all organizations
+     * @return array returns details of all organizations
      */
     public function getAll(array $data = array())
     {
@@ -82,8 +82,8 @@ class Organizations
      * Updates an organization
      *
      * @param  int   $organizationId pipedrives organization Id
-     * @param  array $data     new detials of organization
-     * @return array returns detials of a organization
+     * @param  array $data     new details of organization
+     * @return array returns details of a organization
      */
     public function update($organizationId, array $data = array())
     {
@@ -93,8 +93,8 @@ class Organizations
     /**
      * Adds a organization
      *
-     * @param  array $data organizations detials
-     * @return array returns detials of a organization
+     * @param  array $data organizations details
+     * @return array returns details of a organization
      */
     public function add(array $data)
     {
@@ -110,7 +110,7 @@ class Organizations
      * Deletes an organization
      *
      * @param  int   $organizationId pipedrives organization Id
-     * @return array returns detials of a organization
+     * @return array returns details of a organization
      */
     public function delete($organizationId)
     {
