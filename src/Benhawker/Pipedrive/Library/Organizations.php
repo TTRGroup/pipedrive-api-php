@@ -116,4 +116,17 @@ class Organizations
     {
         return $this->curl->delete('organizations/' . $organizationId);
     }
+
+
+    /**
+     * Get persons of organization
+     *
+     * @param $organizationId
+     * @return array
+     */
+
+    public function listPersons($organizationId)
+    {
+        return $this->curl->get('organizations/'.$organizationId.'/persons');
+    }
 }
