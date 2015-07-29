@@ -117,6 +117,17 @@ class Organizations
         return $this->curl->delete('organizations/' . $organizationId);
     }
 
+    /**
+     * Bulk delete organizations
+     *
+     * @param $ids
+     * @return array
+     */
+    public function bulkDelete($ids)
+    {
+        return $this->curl->bulkDelete('organizations', array('ids' => $ids));
+    }
+
 
     /**
      * Get persons of organization
