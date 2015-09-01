@@ -40,7 +40,8 @@ class Deals
         return $this->curl->get('deals', array(
             "status" => $status,
             "start" => $start,
-            "limit" => $limit
+            "limit" => $limit,
+            "owned_by_you" => 0
         ));
     }
 
