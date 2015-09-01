@@ -32,6 +32,19 @@ class Deals
     }
 
     /**
+     * Retrieve deals by status.
+     * @param int $start the record to start pagination at
+     * @param int $limit the amount of records to return
+     */
+    public function getByStatus($status, $start = 0, $limit = 10) {
+        return $this->curl->get('deals', array(
+            "status" => $status,
+            "start" => $start,
+            "limit" => $limit
+        ));
+    }
+
+    /**
      * Returns a deal
      *
      * @param  int   $id pipedrive deals id
@@ -78,7 +91,7 @@ class Deals
 
     /**
      * Retrieves deals matching the timeline criteria provided in the data parameter.
-     * 
+     *
      * @param array $data (start_date, interval, amount, field_key)
      * @return array deals
      **/
@@ -105,7 +118,7 @@ class Deals
 
         return $this->curl->post('deals', $data);
     }
-    
+
     /**
      * Adds a product to a deal
      *
