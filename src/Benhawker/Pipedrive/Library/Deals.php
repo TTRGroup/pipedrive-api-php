@@ -32,6 +32,20 @@ class Deals
     }
 
     /**
+     * Retrieve deals by status.
+     * @param int $start the record to start pagination at
+     * @param int $limit the amount of records to return
+     */
+    public function getByStatus($status, $start = 0, $limit = 10) {
+        return $this->curl->get('deals', array(
+            "status" => $status,
+            "start" => $start,
+            "limit" => $limit,
+            "owned_by_you" => 0
+        ));
+    }
+
+    /**
      * Returns a deal
      *
      * @param  int   $id pipedrive deals id
@@ -77,6 +91,20 @@ class Deals
     }
 
     /**
+     * Retrieves deals matching the timeline criteria provided in the data parameter.
+     *
+     * @param array $data (start_date, interval, amount, field_key)
+     * @return array deals
+     **/
+    public function timeline($data) {
+        if (!isset($data['start_date']) || !isset($data['interval']) || !isset($data['amount']) || !isset($data['field_key'])) {
+            throw new PipedriveMissingFieldError('You must include the start_date, interval, amound and field_key when getting deals via timeline.');
+        }
+
+        return $this->curl->get('deals/timeline/', $data);
+    }
+
+    /**
      * Adds a deal
      *
      * @param  array $data deal detials
@@ -91,7 +119,7 @@ class Deals
 
         return $this->curl->post('deals', $data);
     }
-    
+
     /**
      * Adds a product to a deal
      *
