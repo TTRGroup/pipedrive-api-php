@@ -166,4 +166,26 @@ class Deals
         return $this->curl->bulkDelete('deals', array('ids' => $ids));
     }
 
+    /**
+     * Get deals timeline
+     * 
+     */
+
+    public function getDealsTimeline($params)
+    {
+        if(!isset($params['start_date'])){
+            throw new PipedriveMissingFieldError('You must include "start_date" when getting deals timeline');
+        }
+        if(!isset($params['interval']) || !in_array($params['interval'],['day','week','month','quarter']) ){
+            throw new PipedriveMissingFieldError('You must include "interval" when getting deals timeline');
+        }
+        if(!isset($params['amount'])){
+            throw new PipedriveMissingFieldError('You must include "amount" when getting deals timeline');
+        }
+        if(!isset($params['field_key'])){
+            throw new PipedriveMissingFieldError('You must include "field_key" when getting deals timeline');
+        }
+
+        return $this->curl->get('deals/timeline', $params);
+    }
 }
