@@ -1,5 +1,6 @@
 <?php namespace Benhawker\Pipedrive\Library;
 
+use Benhawker\Pipedrive\Exceptions\PipedriveException;
 use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
 
 /**
@@ -104,7 +105,7 @@ class Deals
     {
         //if there is no product_id set throw error as it is a required field
         if (!isset($data['product_id'])) {
-            throw new PipedriveMissingFieldError('You must include a "pdoruct_id" field when adding a product to a deal');
+            throw new PipedriveMissingFieldError('You must include a "product_id" field when adding a product to a deal');
         }
         //if there is no item_price set throw error as it is a required field
         if (!isset($data['item_price'])) {
@@ -116,6 +117,31 @@ class Deals
         }
 
         return $this->curl->post('deals/' . $dealId . '/products', $data);
+    }
+
+
+    /**
+     * Update deal attached product.
+     * @param $dealId
+     * @param array $data
+     * @return array
+     * @throws PipedriveMissingFieldError
+     */
+    public function updateProduct($dealId, array $data)
+    {
+        if(!isset($data['deal_product_id'])){
+            throw new PipedriveMissingFieldError('You must include "deal_product_id" field when updating product.');
+        }
+
+        if(!isset($data['item_price'])){
+            throw new PipedriveMissingFieldError('You must include "item_price" field when updating product.');
+        }
+
+        if(!isset($data['quantity'])){
+            throw new PipedriveMissingFieldError('You must include "quantity" field when updating product');
+        }
+
+        return $this->curl->put('deals/'.$dealId.'/products/'.$data['deal_product_id'], $data);
     }
 
     /**
