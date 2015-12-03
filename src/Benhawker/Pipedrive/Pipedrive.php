@@ -1,6 +1,6 @@
 <?php namespace Benhawker\Pipedrive;
 
-    /**
+/**
  * Pipedrive API wrapper class v0.1
  *
  * Author: Ben Hawker (ben@tickettoridegroup.com) 2014
@@ -58,37 +58,37 @@ class Pipedrive
      */
     protected $curl;
     /**
-     * Placeholder attritube for the pipedrive persons class
+     * Placeholder attribute for the pipedrive persons class
      * @var \Benhawker\Pipedrive\Library\Persons Persons Object
      */
     protected $persons;
     /**
-     * Placeholder attritube for the pipedrive deals class
+     * Placeholder attribute for the pipedrive deals class
      * @var \Benhawker\Pipedrive\Library\Deals Deals Object
      */
     protected $deals;
     /**
-     * Placeholder attritube for the pipedrive activities class
+     * Placeholder attribute for the pipedrive activities class
      * @var \Benhawker\Pipedrive\Library\Activities Activities Object
      */
     protected $activities;
     /**
-     * Placeholder attritube for the pipedrive notes class
+     * Placeholder attribute for the pipedrive notes class
      * @var \Benhawker\Pipedrive\Library\Notes Notes Object
      */
     protected $notes;
     /**
-     * Placeholder attritube for the pipedrive dealFields class
+     * Placeholder attribute for the pipedrive dealFields class
      * @var \Benhawker\Pipedrive\Library\DealFields DealFields Object
      */
     protected $dealFields;
     /**
-     * Placeholder attritube for the pipedrive organizations class
+     * Placeholder attribute for the pipedrive organizations class
      * @var Organizations Object
      */
     protected $organizations;
     /**
-     * Placeholder attritube for the pipedrive products class
+     * Placeholder attribute for the pipedrive products class
      * @var Products Object
      */
     protected $products;
@@ -103,7 +103,7 @@ class Pipedrive
      */
     public function __construct($apiKey = '', $protocol = 'https', $host = 'api.pipedrive.com', $version = 'v1')
     {
-        //set var apiKey is essiantial!!
+        //set var apiKey is essential!!
         $this->apiKey   = $apiKey;
         $this->protocol = $protocol;
         $this->host     = $host;
@@ -115,7 +115,7 @@ class Pipedrive
         //add curl library and pass the API Url & key to the object
         $this->curl = new Library\Curl($url, $apiKey);
 
-        //add pipedrive classes to the assoicated property
+        //add pipedrive classes to the associated property
         $this->persons       = new Library\Persons($this);
         $this->deals         = new Library\Deals($this);
         $this->activities    = new Library\Activities($this);

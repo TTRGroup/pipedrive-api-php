@@ -30,7 +30,7 @@ class Curl
     public $curl;
 
     /**
-     * Initialise the cURL session and set headers
+     * Initialize the cURL session and set headers
      */
     public function __construct($url, $apiKey)
     {
@@ -38,7 +38,7 @@ class Curl
         $this->url    = $url;
         $this->apiKey = $apiKey;
 
-        //Intialise cURL session
+        //Initialize cURL session
         $this->curl = curl_init();
         //Set up options for cURL session
         $this->setOpt(CURLOPT_USERAGENT, self::USER_AGENT)
@@ -67,7 +67,7 @@ class Curl
     public function get($method, $data = array())
     {
         //set cURL transfer option for get request
-        // and get ouput
+        // and get output
         return $this->createEndPoint($method, $data)
                     ->setOpt(CURLOPT_CUSTOMREQUEST, 'GET')
                     ->setopt(CURLOPT_HTTPGET, true)
@@ -83,7 +83,7 @@ class Curl
     public function post($method, array $data)
     {
         //set cURL transfer option for post request
-        // and get ouput
+        // and get output
         return $this->createEndPoint($method)
                     ->setOpt(CURLOPT_CUSTOMREQUEST, 'POST')
                     ->setOpt(CURLOPT_POST, true)
@@ -100,7 +100,7 @@ class Curl
     public function put($method, array $data)
     {
         //set cURL transfer option for post request
-        // and get ouput
+        // and get output
         return $this->createEndPoint($method)
                     ->setOpt(CURLOPT_CUSTOMREQUEST, 'PUT')
                     ->setOpt(CURLOPT_POSTFIELDS, http_build_query($data))
@@ -116,7 +116,7 @@ class Curl
     public function delete($method)
     {
         //set cURL transfer option for delete request
-        // and get ouput
+        // and get output
         return $this->createEndPoint($method)
                     ->setOpt(CURLOPT_CUSTOMREQUEST, 'DELETE')
                     ->exec();
@@ -125,7 +125,7 @@ class Curl
     /**
      * Execute current cURL session
      *
-     * @return array decoded json ouput
+     * @return array decoded json output
      */
     protected function exec()
     {
@@ -203,9 +203,9 @@ class Curl
     protected function postfields($data)
     {
         if (is_array($data)) {
-            //if mulitdimensional array
+            //if multidimensional array
             if ($this->isArrayMultiDim($data)) {
-                // build bultidimensial query
+                // build multidimensional query
                 $data = $this->httpBuildMultiQuery($data);
             } else {
                 //loop through array
@@ -232,7 +232,7 @@ class Curl
     }
 
     /**
-     * Build multidimenianl query
+     * Build multidimensional query
      * from: https://github.com/php-curl-class/php-curl-class
      *
      * @param  array  $data post data
