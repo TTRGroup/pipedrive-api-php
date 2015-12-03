@@ -20,7 +20,7 @@ class Notes
     protected $curl;
 
     /**
-     * Initialise the object load master class
+     * Initialize the object load master class
      */
     public function __construct(\Benhawker\Pipedrive\Pipedrive $master)
     {
@@ -31,8 +31,8 @@ class Notes
     /**
      * Adds a note
      *
-     * @param  array $data note detials
-     * @return array returns detials of the note
+     * @param  array $data note details
+     * @return array returns details of the note
      */
     public function add(array $data)
     {
@@ -41,7 +41,7 @@ class Notes
             throw new PipedriveMissingFieldError('You must include a "content" field when inserting a note');
         }
 
-        //if there is no deal, person, organisation id set throw error as one of the fields is required
+        //if there is no deal, person, organization id set throw error as one of the fields is required
         if (!isset($data['deal_id']) && !isset($data['person_id']) && !isset($data['org_id'])) {
             throw new PipedriveMissingFieldError('You must include one of the following "deal_id", "person_id", "org_id" field when inserting a note');
         }

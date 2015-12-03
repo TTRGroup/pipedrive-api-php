@@ -1,48 +1,67 @@
 PipeDrive-api-php
-============
+=================
 
-PHP API client library for the PipeDrive CRM
+PHP API client library for the PipeDrive CRM.
 
 Only some basic functionality required for my current project has been added. However the basic blocks are to make use of the whole API including file uploading.
 
-Recommend you install this library through composer. https://packagist.org/packages/benhawker/pipedrive
+Recommend you install this library through composer: https://packagist.org/packages/benhawker/pipedrive
+
+    composer require benhawker/pipedrive dev-master
 
 API Docs can be found here: https://developers.pipedrive.com/v1
 
-Example:  
-  
+Example:
+--------
+
 ```php
-use Benhawker\Pipedrive\Pipedrive;  
+use Benhawker\Pipedrive\Pipedrive;
 
-$pipedrive = new Pipedrive('0deceea867202fcf3889cd507ef93a91789f7e3a');  
+$pipedrive = new Pipedrive('0deceea867202fcf3889cd507ef93a91789f7e3a');
 
-//add user  
-$person['name'] = 'John Smith';  
+/**
+ * Add company.
+ */
+$organization['name'] = 'Explorer';
 
-$person = $pipedrive->persons()->add($person);  
+$organization = $pipedrive->organizations()->add($organization);
 
-//add note to user  
-$note['content']   = 'example note';  
-$note['person_id'] = $person['data']['id'];  
+/**
+ * Add customer.
+ */
+$person['name'] = 'John Smith';
+$person['org_id'] = $organization['data']['id'];
 
-$pipedrive->notes()->add($note);  
+$person = $pipedrive->persons()->add($person);
 
-//add deal to user  
-deal['title']      = 'example title';  
-$deal['stage_id']  = 8;  
-$deal['person_id'] = $person['data']['id'];  
+/**
+ * Add note to customer.
+ */
+$note['content'] = 'example note';
+$note['person_id'] = $person['data']['id'];
 
-$pipedrive->deals()->add($deal);  
+$pipedrive->notes()->add($note);
 
-//add activity  
-$activity = array(  
-                    'subject' => 'Example send brochure',  
-                    'type' => 'send-brochure',  
-                    'person_id' => 17686,  
-                    'user_id' => 190870,  
-                    'deal_id' => 88,  
-                    'due_date' => date('Y-m-d')  
-                    );  
+/**
+ * Add deal to customer.
+ */
+$deal['title'] = 'example title';
+$deal['stage_id'] = 8;
+$deal['person_id'] = $person['data']['id'];
+
+$pipedrive->deals()->add($deal);
+
+/**
+ * Add activity.
+ */
+$activity = array(
+    'subject' => 'Example send brochure',
+    'type' => 'send-brochure',
+    'person_id' => 17686,
+    'user_id' => 190870,
+    'deal_id' => 88,
+    'due_date' => date('Y-m-d')
+);
 
 $pipedrive->activities()->add($activity);
 ```

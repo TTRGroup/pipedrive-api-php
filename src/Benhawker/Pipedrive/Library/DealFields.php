@@ -25,7 +25,7 @@ class DealFields
     protected $curl;
 
     /**
-     * Initialise the object load master class
+     * Initialize the object load master class
      */
     public function __construct(\Benhawker\Pipedrive\Pipedrive $master)
     {
@@ -42,7 +42,7 @@ class DealFields
     {
         return $this->curl->get('dealFields');
     }
-    
+
     /**
      * Returns a deal field
      *
@@ -57,7 +57,7 @@ class DealFields
     /**
      * Adds a dealField
      *
-     * @param  array $data deal field detials
+     * @param  array $data deal field details
      * @return array returns details of the deal field
      */
     public function add(array $data)

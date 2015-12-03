@@ -10,7 +10,7 @@ use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
  * have a price in N different currencies, and secondly, each Product can
  * have N variations of itself, each having N prices different currencies.
  * Note that only one price per variation per currency is supported.
- * Products can be instantiated to Deals. In the context of instatiation,
+ * Products can be instantiated to Deals. In the context of instantiation,
  * a custom price, quantity, duration and discount can be applied.
  */
 class Products
@@ -22,7 +22,7 @@ class Products
     protected $curl;
 
     /**
-     * Initialise the object load master class
+     * Initialize the object load master class
      */
     public function __construct(\Benhawker\Pipedrive\Pipedrive $master)
     {
@@ -33,8 +33,8 @@ class Products
     /**
      * Returns a product / products
      *
-     * @param  string $name pipedrive prodeuct name
-     * @return array  returns detials of a product
+     * @param  string $name pipedrive product name
+     * @return array  returns details of a product
      */
     public function getByName($name)
     {

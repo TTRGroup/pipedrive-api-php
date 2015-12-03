@@ -19,7 +19,7 @@ class Persons
     protected $curl;
 
     /**
-     * Initialise the object load master class
+     * Initialize the object load master class
      */
     public function __construct(\Benhawker\Pipedrive\Pipedrive $master)
     {
@@ -31,7 +31,7 @@ class Persons
      * Returns a person
      *
      * @param  int   $id pipedrive persons id
-     * @return array returns detials of a person
+     * @return array returns details of a person
      */
     public function getById($id)
     {
@@ -42,7 +42,7 @@ class Persons
      * Returns a person / people
      *
      * @param  string $name pipedrive persons name
-     * @return array  returns detials of a person
+     * @return array  returns details of a person
      */
     public function getByName($name)
     {
@@ -85,8 +85,8 @@ class Persons
      * Updates a person
      *
      * @param  int   $personId pipedrives person Id
-     * @param  array $data     new detials of person
-     * @return array returns detials of a person
+     * @param  array $data     new details of person
+     * @return array returns details of a person
      */
     public function update($personId, array $data = array())
     {
@@ -96,8 +96,8 @@ class Persons
     /**
      * Adds a person
      *
-     * @param  array $data persons detials
-     * @return array returns detials of a person
+     * @param  array $data persons details
+     * @return array returns details of a person
      */
     public function add(array $data)
     {
@@ -113,7 +113,7 @@ class Persons
      * Deletes a person
      *
      * @param  int   $personId pipedrives person Id
-     * @return array returns detials of a person
+     * @return array returns details of a person
      */
     public function delete($personId)
     {
