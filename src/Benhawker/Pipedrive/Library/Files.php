@@ -78,9 +78,7 @@ class Files
 
     /**
      * Lets you upload one or more files, and associate them with a Deal, a Person, an Organization, an Activity or a
-     * Product. IMPORTANT: This endpoint uses multipart/form-data encoding and cannot be tested using the documentation
-     * page directly. However, it is a supported action within our NodeJS based API client as of versions 1.5.1. You can
-     * use that to test out the file upload.
+     * Product.
      *
      * @param $file
      * @param null $deal_id
