@@ -94,11 +94,18 @@ class Pipedrive
      * @var Organizations Object
      */
     protected $organizations;
+
     /**
      * Placeholder attritube for the pipedrive products class
      * @var Products Object
      */
     protected $products;
+
+    /**
+     * Placeholder attritube for the pipedrive stages class
+     * @var Stages Object
+     */
+    protected $stages;
 
     /**
      * Set up API url and load library classes
@@ -131,6 +138,7 @@ class Pipedrive
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
+        $this->stages        = new Library\Stages($this);
     }
 
     /**
@@ -221,5 +229,15 @@ class Pipedrive
     public function products()
     {
         return $this->products;
+    }
+
+    /**
+     * Returns the Pipedrive Stages Object
+     *
+     * @return Stages Object
+     */
+    public function stages()
+    {
+        return $this->stages;
     }
 }
