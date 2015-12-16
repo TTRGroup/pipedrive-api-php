@@ -108,6 +108,12 @@ class Pipedrive
     protected $stages;
 
     /**
+     * Placeholder attritube for the pipedrive files class
+     * @var Files Object
+     */
+    protected $files;
+
+    /**
      * Set up API url and load library classes
      *
      * @param string $apiKey   API key
@@ -138,6 +144,7 @@ class Pipedrive
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
+        $this->files         = new Library\Files($this);
         $this->stages        = new Library\Stages($this);
     }
 
@@ -239,5 +246,16 @@ class Pipedrive
     public function stages()
     {
         return $this->stages;
+    }
+
+
+    /**
+     * Returns the Pipedrive Files Object
+     *
+     * @return Files Object
+     */
+    public function files()
+    {
+        return $this->files;
     }
 }
