@@ -33,6 +33,8 @@ class Notes
      *
      * @param  array $data note detials
      * @return array returns detials of the note
+     *
+     * @throws PipedriveMissingFieldError
      */
     public function add(array $data)
     {

@@ -62,6 +62,13 @@ class Pipedrive
      * @var \Benhawker\Pipedrive\Library\Persons Persons Object
      */
     protected $persons;
+
+    /**
+     * Placeholder attritube for the pipedrive personFields class
+     * @var \Benhawker\Pipedrive\Library\PersonField Object
+     */
+    protected $personFields;
+
     /**
      * Placeholder attritube for the pipedrive deals class
      * @var \Benhawker\Pipedrive\Library\Deals Deals Object
@@ -94,6 +101,12 @@ class Pipedrive
     protected $products;
 
     /**
+     * Placeholder attritube for the pipedrive files class
+     * @var Files Object
+     */
+    protected $files;
+
+    /**
      * Set up API url and load library classes
      *
      * @param string $apiKey   API key
@@ -117,12 +130,14 @@ class Pipedrive
 
         //add pipedrive classes to the assoicated property
         $this->persons       = new Library\Persons($this);
+        $this->personFields  = new Library\PersonFields($this);
         $this->deals         = new Library\Deals($this);
         $this->activities    = new Library\Activities($this);
         $this->notes         = new Library\Notes($this);
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
+        $this->files         = new Library\Files($this);
     }
 
     /**
@@ -143,6 +158,16 @@ class Pipedrive
     public function persons()
     {
         return $this->persons;
+    }
+
+    /**
+     * Returns the Pipedrive personFields Object
+     *
+     * @return \Benhawker\Pipedrive\Library\PersonFields
+     */
+    public function personFields()
+    {
+        return $this->personFields;
     }
 
     /**
@@ -203,5 +228,16 @@ class Pipedrive
     public function products()
     {
         return $this->products;
+    }
+
+
+    /**
+     * Returns the Pipedrive Files Object
+     *
+     * @return Files Object
+     */
+    public function files()
+    {
+        return $this->files;
     }
 }
