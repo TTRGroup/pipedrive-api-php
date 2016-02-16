@@ -74,7 +74,7 @@ class Deals
             throw new PipedriveMissingFieldError('You must include the "id" of the deal when getting products');
         }
 
-        return $this->curl->get('deals/' . $data['id'] . '/products');
+        return $this->curl->get('deals/' . $data['id'] . '/products', $data);
     }
 
     /**
