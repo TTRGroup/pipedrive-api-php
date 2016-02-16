@@ -44,9 +44,11 @@ class Persons
      * @param  string $name pipedrive persons name
      * @return array  returns detials of a person
      */
-    public function getByName($name)
+    public function getByName($name, $data = array())
     {
-        return $this->curl->get('persons/find', array('term' => $name));
+        $data['term'] = $name;
+        
+        return $this->curl->get('persons/find', $data);
     }
 
     /**
