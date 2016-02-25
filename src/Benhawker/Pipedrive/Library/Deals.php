@@ -214,4 +214,14 @@ class Deals
 
         return $this->curl->get('deals/timeline', $params);
     }
+
+    /**
+     * Get all deals by filter id
+     * @param $params
+     * @return array
+     */
+    public function getAllDeals($params)
+    {
+        return $this->curl->get('deals', $params);
+    }
 }
