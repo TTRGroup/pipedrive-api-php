@@ -75,7 +75,7 @@ class Organizations
         if (!isset($data['id'])) {
             throw new PipedriveMissingFieldError('You must include the "id" of the organization when getting deals');
         }
-        return $this->curl->get('organizations/' . $data['id'] . '/deals');
+        return $this->curl->get('organizations/' . $data['id'] . '/deals', $data);
     }
 
     /**
