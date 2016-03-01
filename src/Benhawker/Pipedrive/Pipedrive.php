@@ -1,4 +1,5 @@
 <?php namespace Benhawker\Pipedrive;
+use Benhawker\Pipedrive\Library\SearchResults;
 
     /**
  * Pipedrive API wrapper class v0.1
@@ -58,40 +59,45 @@ class Pipedrive
      */
     protected $curl;
     /**
-     * Placeholder attritube for the pipedrive persons class
+     * Placeholder attribute for the pipedrive persons class
      * @var \Benhawker\Pipedrive\Library\Persons Persons Object
      */
     protected $persons;
     /**
-     * Placeholder attritube for the pipedrive deals class
+     * Placeholder attribute for the pipedrive deals class
      * @var \Benhawker\Pipedrive\Library\Deals Deals Object
      */
     protected $deals;
     /**
-     * Placeholder attritube for the pipedrive activities class
+     * Placeholder attribute for the pipedrive activities class
      * @var \Benhawker\Pipedrive\Library\Activities Activities Object
      */
     protected $activities;
     /**
-     * Placeholder attritube for the pipedrive notes class
+     * Placeholder attribute for the pipedrive notes class
      * @var \Benhawker\Pipedrive\Library\Notes Notes Object
      */
     protected $notes;
     /**
-     * Placeholder attritube for the pipedrive dealFields class
+     * Placeholder attribute for the pipedrive dealFields class
      * @var \Benhawker\Pipedrive\Library\DealFields DealFields Object
      */
     protected $dealFields;
     /**
-     * Placeholder attritube for the pipedrive organizations class
+     * Placeholder attribute for the pipedrive organizations class
      * @var Organizations Object
      */
     protected $organizations;
     /**
-     * Placeholder attritube for the pipedrive products class
+     * Placeholder attribute for the pipedrive products class
      * @var Products Object
      */
     protected $products;
+    /**
+     * Placeholder attribute for Pipedrive SearchResults class
+     * @var \Benhawker\Pipedrive\Library\SearchResults Object
+     */
+    protected $searchResults;
 
     /**
      * Set up API url and load library classes
@@ -123,6 +129,7 @@ class Pipedrive
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
+        $this->searchResults = new Library\SearchResults($this);
     }
 
     /**
@@ -203,5 +210,14 @@ class Pipedrive
     public function products()
     {
         return $this->products;
+    }
+
+    /**
+     * Returns the Pipedrive SearchResults Object
+     * @return SearchResults Object
+     */
+    public function searchResults()
+    {
+        return $this->searchResults;
     }
 }

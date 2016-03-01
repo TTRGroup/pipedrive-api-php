@@ -252,7 +252,7 @@ class Curl
     }
 
     /**
-     * Build multidimenianl query
+     * Build multidimensional query
      * from: https://github.com/php-curl-class/php-curl-class
      *
      * @param  array  $data post data
