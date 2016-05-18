@@ -4,16 +4,16 @@ use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
 
 /**
  * Pipedrive Persons Methods
- *
  * Persons are your contacts, the customers you are doing Deals with.
  * Each Person can belong to an Organization.
  * Persons should not be confused with Users.
- *
+
  */
 class Persons
 {
     /**
      * Hold the pipedrive cURL session
+     *
      * @var \Benhawker\Pipedrive\Library\Curl Curl Object
      */
     protected $curl;
@@ -30,12 +30,23 @@ class Persons
     /**
      * Returns a person
      *
-     * @param  int   $id pipedrive persons id
+     * @param  int $id pipedrive persons id
      * @return array returns detials of a person
      */
     public function getById($id)
     {
         return $this->curl->get('persons/' . $id);
+    }
+
+    /**
+     * Returns a person / people
+     *
+     * @param  string $name pipedrive persons name
+     * @return array  returns detials of a person
+     */
+    public function getIdByName($name)
+    {
+        return $this->curl->get('persons/find', array('term' => $name))['data'][0]['id'];
     }
 
     /**
@@ -112,7 +123,7 @@ class Persons
     /**
      * Deletes a person
      *
-     * @param  int   $personId pipedrives person Id
+     * @param  int $personId pipedrives person Id
      * @return array returns detials of a person
      */
     public function delete($personId)
