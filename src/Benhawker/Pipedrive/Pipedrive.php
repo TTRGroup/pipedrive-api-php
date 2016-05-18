@@ -1,10 +1,9 @@
 <?php namespace Benhawker\Pipedrive;
 
     /**
- * Pipedrive API wrapper class v0.1
- *
- * Author: Ben Hawker (ben@tickettoridegroup.com) 2014
- */
+     * Pipedrive API wrapper class v0.1
+     * Author: Ben Hawker (ben@tickettoridegroup.com) 2014
+     */
 
 /*
 (MIT License)
@@ -34,64 +33,82 @@ class Pipedrive
 {
     /**
      * API Key
+     *
      * @var string
      */
     protected $apiKey;
     /**
      * Protocol (default 'https')
+     *
      * @var string
      */
     protected $protocol;
     /**
      * Host Url (default 'api.pipedrive,com')
+     *
      * @var string
      */
     protected $host;
     /**
      * API version (default 'v1')
+     *
      * @var string
      */
     protected $version;
     /**
      * Hold the Curl Object
+     *
      * @var \Benhawker\Pipedrive\Library\Curl Curl Object
      */
     protected $curl;
     /**
      * Placeholder attritube for the pipedrive persons class
+     *
      * @var \Benhawker\Pipedrive\Library\Persons Persons Object
      */
     protected $persons;
     /**
      * Placeholder attritube for the pipedrive deals class
+     *
      * @var \Benhawker\Pipedrive\Library\Deals Deals Object
      */
     protected $deals;
     /**
      * Placeholder attritube for the pipedrive activities class
+     *
      * @var \Benhawker\Pipedrive\Library\Activities Activities Object
      */
     protected $activities;
     /**
      * Placeholder attritube for the pipedrive notes class
+     *
      * @var \Benhawker\Pipedrive\Library\Notes Notes Object
      */
     protected $notes;
     /**
      * Placeholder attritube for the pipedrive dealFields class
+     *
      * @var \Benhawker\Pipedrive\Library\DealFields DealFields Object
      */
     protected $dealFields;
     /**
      * Placeholder attritube for the pipedrive organizations class
+     *
      * @var Organizations Object
      */
     protected $organizations;
     /**
      * Placeholder attritube for the pipedrive products class
+     *
      * @var Products Object
      */
     protected $products;
+    /**
+     * Placeholder attritube for the pipedrive users class
+     *
+     * @var users Object
+     */
+    protected $users;
 
     /**
      * Set up API url and load library classes
@@ -123,6 +140,7 @@ class Pipedrive
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
+        $this->users         = new Library\Users($this);
     }
 
     /**
@@ -203,5 +221,15 @@ class Pipedrive
     public function products()
     {
         return $this->products;
+    }
+
+    /**
+     * Returns the PipedriveYooportal Users Object
+     *
+     * @return Products Object
+     */
+    public function users()
+    {
+        return $this->users;
     }
 }

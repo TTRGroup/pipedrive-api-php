@@ -4,20 +4,19 @@ use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
 
 /**
  * Pipedrive Organizations Methods
- *
- * Organizations are companies and other kinds of organizations you are making 
- * Deals with. Persons can be associated with organizations so that each 
+ * Organizations are companies and other kinds of organizations you are making
+ * Deals with. Persons can be associated with organizations so that each
  * organization can contain one or more Persons.
- *
  */
 class Organizations
 {
     /**
      * Hold the pipedrive cURL session
+     *
      * @var Curl Object
      */
     protected $curl;
-    
+
     /**
      * Initialise the object load master class
      */
@@ -30,7 +29,7 @@ class Organizations
     /**
      * Returns a organization
      *
-     * @param  int   $id pipedrive organizations id
+     * @param  int $id pipedrive organizations id
      * @return array returns detials of a organization
      */
     public function getById($id)
@@ -38,7 +37,7 @@ class Organizations
         return $this->curl->get('organizations/' . $id);
     }
 
-	/**
+    /**
      * Returns an organization
      *
      * @param  string $name pipedrive organizations name
@@ -50,8 +49,7 @@ class Organizations
         $data['term'] = $name;
         return $this->curl->get('organizations/find', $data);
     }
-    
-      
+
     /**
      * Returns all organizations
      *
@@ -62,7 +60,20 @@ class Organizations
     {
         return $this->curl->get('organizations/', $data);
     }
-    
+
+    /**
+     * Returns an organization id
+     *
+     * @param  string $name pipedrive organizations name
+     * @param  array  $data (start, limit)
+     * @return array  returns id of a organization
+     */
+    public function getIdByName($name, array $data = array())
+    {
+        $data['term'] = $name;
+        return $this->curl->get('organizations/find', $data)['data'][0]['id'];
+    }
+
     /**
      * Lists deals associated with a organization.
      *
@@ -82,7 +93,7 @@ class Organizations
      * Updates an organization
      *
      * @param  int   $organizationId pipedrives organization Id
-     * @param  array $data     new detials of organization
+     * @param  array $data           new detials of organization
      * @return array returns detials of a organization
      */
     public function update($organizationId, array $data = array())
@@ -109,7 +120,7 @@ class Organizations
     /**
      * Deletes an organization
      *
-     * @param  int   $organizationId pipedrives organization Id
+     * @param  int $organizationId pipedrives organization Id
      * @return array returns detials of a organization
      */
     public function delete($organizationId)
