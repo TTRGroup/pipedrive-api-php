@@ -224,4 +224,15 @@ class Deals
     {
         return $this->curl->get('deals', $params);
     }
+
+    /**
+     * List all activities associated to deal.
+     * @param $dealId
+     * @param array $params
+     * @return array
+     */
+    public function listActivities($dealId, $params = [])
+    {
+        return $this->curl->get('deals/' . $dealId . '/activities', $params);
+    }
 }
