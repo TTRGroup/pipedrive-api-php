@@ -55,6 +55,16 @@ class Activities
         return $this->curl->delete('activities/'.$id);
     }
 
+    /**
+     * Update activity
+     * @param $id
+     * @param $data
+     * @return array
+     */
+    public function update($id, $data)
+    {
+        return $this->curl->put('activities/' . $id, $data);
+    }
 
     /**
      * Return activity
