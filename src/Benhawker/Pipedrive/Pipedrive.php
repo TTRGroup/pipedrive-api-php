@@ -125,6 +125,33 @@ class Pipedrive
         $this->products      = new Library\Products($this);
     }
 
+     /**
+     * Sets ApiKey using username and password
+     * 
+     * @param string $username  Username of pipedrive user
+     * @param string $password  Password of pipedrive user
+     * @return Api Key
+     * @throws Exceptions\PipedriveException
+     */
+    public function login($username, $password) {
+        $params = array("email" => $username, "password" => $password);
+        $response = $this->curl()->post("authorizations", $params);
+        $errorMessage = "Wrong email/password combination.";
+
+        //Handle response
+        if (isset($response["success"]) && $response["success"] == true) {
+            if (isset($response["data"]) && isset($response["data"][0]) && isset($response["data"][0]["api_token"])) {
+                $this->apiKey = $response["data"][0]["api_token"];
+                //Reinitalize class constructor in case of some actions must be made with new ApiKey
+                $this->__construct($this->apiKey, $this->protocol, $this->host, $this->version);
+                return $this->apiKey;
+            }
+        } else if (isset($response["error"]) && $response["error"]) {
+            $errorMessage = $response["error"];
+        }
+        throw new Exceptions\PipedriveException($errorMessage);
+    }
+
     /**
      * Returns the Pipedrive cURL Session
      *
