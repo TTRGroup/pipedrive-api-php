@@ -92,6 +92,21 @@ class Pipedrive
      * @var Products Object
      */
     protected $products;
+    /**
+     * Placeholder attritube for the pipedrive filters class
+     * @var Filters Object
+     */
+    protected $filters;
+    /**
+     * Placeholder attritube for the pipedrive pipelines class
+     * @var Pipelines Object
+     */
+    protected $pipelines;
+    /**
+     * Placeholder attritube for the pipedrive stages class
+     * @var Filters Object
+     */
+    protected $stages;
 
     /**
      * Set up API url and load library classes
@@ -123,6 +138,36 @@ class Pipedrive
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
+        $this->filters       = new Library\Filters($this);
+        $this->pipelines     = new Library\Pipelines($this);
+        $this->stages        = new Library\Stages($this);
+    }
+
+     /**
+     * Sets ApiKey using username and password
+     * 
+     * @param string $username  Username of pipedrive user
+     * @param string $password  Password of pipedrive user
+     * @return Api Key
+     * @throws Exceptions\PipedriveException
+     */
+    public function login($username, $password) {
+        $params = array("email" => $username, "password" => $password);
+        $response = $this->curl()->post("authorizations", $params);
+        $errorMessage = "Wrong email/password combination.";
+
+        //Handle response
+        if (isset($response["success"]) && $response["success"] == true) {
+            if (isset($response["data"]) && isset($response["data"][0]) && isset($response["data"][0]["api_token"])) {
+                $this->apiKey = $response["data"][0]["api_token"];
+                //Reinitalize class constructor in case of some actions must be made with new ApiKey
+                $this->__construct($this->apiKey, $this->protocol, $this->host, $this->version);
+                return $this->apiKey;
+            }
+        } else if (isset($response["error"]) && $response["error"]) {
+            $errorMessage = $response["error"];
+        }
+        throw new Exceptions\PipedriveException($errorMessage);
     }
 
     /**
@@ -203,5 +248,35 @@ class Pipedrive
     public function products()
     {
         return $this->products;
+    }
+    
+    /**
+     * Returns the Pipedrive Filters Object
+     *
+     * @return Filters Object
+     */
+    public function filters()
+    {
+        return $this->filters;
+    }
+    
+    /**
+     * Returns the Pipedrive Pipelines Object
+     *
+     * @return Pipelines Object
+     */
+    public function pipelines()
+    {
+        return $this->pipelines;
+    }
+    
+    /**
+     * Returns the Pipedrive Stages Object
+     *
+     * @return Stages Object
+     */
+    public function stages()
+    {
+        return $this->stages;
     }
 }
