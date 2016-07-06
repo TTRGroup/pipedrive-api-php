@@ -43,6 +43,18 @@ class Deals
     }
 
     /**
+     * Returns a deal / deals filtered by filter id
+     *
+     * @param  int      $filterId pipedrive deals filter id
+     * @return array    returns detials of a deal
+     */
+    public function getByFilter($filterId) {
+        $filterId = (int) $filterId;
+        $params = array("filter_id" => $filterId);
+        return $this->curl->get("deals", $params);
+    }
+
+    /**
      * Returns a deal / deals
      *
      * @param  string $name pipedrive deals title
@@ -91,7 +103,7 @@ class Deals
 
         return $this->curl->post('deals', $data);
     }
-    
+
     /**
      * Adds a product to a deal
      *
