@@ -92,6 +92,11 @@ class Pipedrive
      * @var Products Object
      */
     protected $products;
+    /**
+     * Placeholder attritube for the pipedrive filters class
+     * @var Filters Object
+     */
+    protected $filters;
 
     /**
      * Set up API url and load library classes
@@ -123,6 +128,7 @@ class Pipedrive
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
+        $this->filters       = new Library\Filters($this);
     }
 
      /**
@@ -230,5 +236,15 @@ class Pipedrive
     public function products()
     {
         return $this->products;
+    }
+    
+    /**
+     * Returns the Pipedrive Filters Object
+     *
+     * @return Filters Object
+     */
+    public function filters()
+    {
+        return $this->filters;
     }
 }
