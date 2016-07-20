@@ -122,6 +122,16 @@ class Persons
     }
 
     /**
+     * Get all persons by filter id
+     * @param $params
+     * @return array
+     */
+    public function getAll($params)
+    {
+        return $this->curl->get('persons', $params);
+    }
+
+    /**
      * Deletes a person
      *
      * @param  int   $personId pipedrives person Id
