@@ -68,6 +68,12 @@ class Pipedrive
      * @var \Benhawker\Pipedrive\Library\Deals Deals Object
      */
     protected $deals;
+
+    /**
+     * Placeholder attribute for pipedrive filters class
+     * @var \Benhawker\Pipedrive\Library\Filters Filters Object
+     */
+    protected $filters;
     /**
      * Placeholder attribute for the pipedrive activities class
      * @var \Benhawker\Pipedrive\Library\Activities Activities Object
@@ -130,6 +136,7 @@ class Pipedrive
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
         $this->searchResults = new Library\SearchResults($this);
+        $this->filters       = new Library\Filters($this);
     }
 
     /**
@@ -160,6 +167,15 @@ class Pipedrive
     public function deals()
     {
         return $this->deals;
+    }
+
+    /**
+     * Returns the Pipedrive Filters Object
+     * @return Library\Filters
+     */
+    public function filters()
+    {
+        return $this->filters;
     }
 
     /**
