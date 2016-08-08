@@ -26,6 +26,23 @@ class Persons
         //associate curl class
         $this->curl = $master->curl();
     }
+	
+	/**
+     * Returns a the people
+     *
+     * @param  array   $paramters The paramters of start, filter_id, limit, and sort when finding all the contats
+     * @return array returns detials of a person
+     */
+    public function getAll($parameters = array())
+    {
+    	$default = array(
+			'filter_id' => '',
+			'start' => 0,
+			'limit' => 500,
+			'sort' => ''
+		);
+        return $this->curl->get('persons', $parameters);
+    }
 
     /**
      * Returns a person
@@ -42,11 +59,16 @@ class Persons
      * Returns a person / people
      *
      * @param  string $name pipedrive persons name
+	 * @param  array $options Additionals search options such as email
      * @return array  returns detials of a person
      */
-    public function getByName($name)
+    public function getByName($name, $options = array())
     {
-        return $this->curl->get('persons/find', array('term' => $name));
+    	$data = array('term' => $name);
+		
+		$data += $options;
+		
+        return $this->curl->get('persons/find', $data );
     }
 
     /**
