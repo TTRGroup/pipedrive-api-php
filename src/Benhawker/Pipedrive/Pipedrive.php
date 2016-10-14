@@ -88,6 +88,11 @@ class Pipedrive
      */
     protected $organizations;
     /**
+     * Placeholder attritube for the pipedrive organizationFields class
+     * @var \Benhawker\Pipedrive\Library\OrganizationFields OrganizationFields Object
+     */
+    protected $organizationFields;
+    /**
      * Placeholder attritube for the pipedrive products class
      * @var Products Object
      */
@@ -122,6 +127,7 @@ class Pipedrive
         $this->notes         = new Library\Notes($this);
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
+        $this->organizationFields = new Library\OrganizationFields($this);
         $this->products      = new Library\Products($this);
     }
 
@@ -193,6 +199,16 @@ class Pipedrive
     public function organizations()
     {
         return $this->organizations;
+    }
+    
+    /**
+     * Returns the Pipedrive OrganizationFields Object
+     *
+     * @return \Benhawker\Pipedrive\Library\OrganizationFields
+     */
+    public function organizationFields()
+    {
+        return $this->organizationFields;
     }
 
     /**
