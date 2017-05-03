@@ -28,7 +28,7 @@ $note['person_id'] = $person['data']['id'];
 $pipedrive->notes()->add($note);  
 
 //add deal to user  
-deal['title']      = 'example title';  
+$deal['title']      = 'example title';  
 $deal['stage_id']  = 8;  
 $deal['person_id'] = $person['data']['id'];  
 
