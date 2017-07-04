@@ -62,12 +62,13 @@ class Organizations
     {
         return $this->curl->get('organizations/', $data);
     }
-    
+
     /**
      * Lists deals associated with a organization.
      *
      * @param  array $data (id, start, limit)
      * @return array deals
+     * @throws PipedriveMissingFieldError
      */
     public function deals(array $data)
     {
@@ -82,8 +83,8 @@ class Organizations
      * Updates an organization
      *
      * @param  int   $organizationId pipedrives organization Id
-     * @param  array $data     new detials of organization
-     * @return array returns detials of a organization
+     * @param  array $data     new details of organization
+     * @return array returns details of a organization
      */
     public function update($organizationId, array $data = array())
     {
@@ -93,8 +94,9 @@ class Organizations
     /**
      * Adds a organization
      *
-     * @param  array $data organizations detials
-     * @return array returns detials of a organization
+     * @param  array $data organizations details
+     * @return array returns details of a organization
+     * @throws PipedriveMissingFieldError
      */
     public function add(array $data)
     {
@@ -110,7 +112,7 @@ class Organizations
      * Deletes an organization
      *
      * @param  int   $organizationId pipedrives organization Id
-     * @return array returns detials of a organization
+     * @return array returns details of a organization
      */
     public function delete($organizationId)
     {
@@ -139,5 +141,30 @@ class Organizations
     public function listPersons($organizationId)
     {
         return $this->curl->get('organizations/'.$organizationId.'/persons');
+    }
+
+    /**
+     * Add follower to organization.
+     * @param $organizationId
+     * @param $userId
+     * @return array
+     */
+    public function addFollower($organizationId, $userId)
+    {
+        return $this->curl->post('organizations/' . $organizationId . '/followers',[
+            'id' => $organizationId,
+            'user_id' => $userId
+        ]);
+    }
+
+    /**
+     * Delete organization follower.
+     * @param $organizationId
+     * @param $userId
+     * @return array
+     */
+    public function deleteFollower($organizationId, $userId)
+    {
+        return $this->curl->delete('organizations/' . $organizationId . '/followers/' . $userId);
     }
 }

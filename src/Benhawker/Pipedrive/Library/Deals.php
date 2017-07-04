@@ -36,7 +36,7 @@ class Deals
      * Returns a deal
      *
      * @param  int   $id pipedrive deals id
-     * @return array returns detials of a deal
+     * @return array returns details of a deal
      */
     public function getById($id)
     {
@@ -47,7 +47,7 @@ class Deals
      * Returns a deal / deals
      *
      * @param  string $name pipedrive deals title
-     * @return array  returns detials of a deal
+     * @return array  returns details of a deal
      */
     public function getByName($name, $personId=null, $orgId=null)
     {
@@ -66,6 +66,7 @@ class Deals
      *
      * @param  array $data (id, start, limit)
      * @return array products
+     * @throws PipedriveMissingFieldError
      */
     public function products(array $data)
     {
@@ -80,8 +81,9 @@ class Deals
     /**
      * Adds a deal
      *
-     * @param  array $data deal detials
-     * @return array returns detials of the deal
+     * @param  array $data deal details
+     * @return array returns details of the deal
+     * @throws PipedriveMissingFieldError
      */
     public function add(array $data)
     {
@@ -97,8 +99,8 @@ class Deals
      * Adds a product to a deal
      *
      * @param  int   $dealId deal id
-     * @param  array $data deal and product detials
-     * @return array returns detials of the deal-product
+     * @param  array $data deal and product details
+     * @return array returns details of the deal-product
      * @throws PipedriveMissingFieldError
      */
     public function addProduct($dealId, array $data)
@@ -148,8 +150,8 @@ class Deals
      * Updates a deal
      *
      * @param  int   $dealId pipedrives deal Id
-     * @param  array $data   new detials of deal
-     * @return array returns detials of a deal
+     * @param  array $data   new details of deal
+     * @return array returns details of a deal
      */
     public function update($dealId, array $data = array())
     {
@@ -161,7 +163,7 @@ class Deals
      *
      * @param  int   $dealId  deal id
      * @param  int   $stageId stage id
-     * @return array returns detials of the deal
+     * @return array returns details of the deal
      */
     public function moveStage($dealId, $stageId)
     {
@@ -184,7 +186,7 @@ class Deals
     /**
      * Bulk delete deals
      *
-     * @param $ids comma separated ids
+     * @param $ids string Comma separated ids
      * @return mixed
      */
     public function bulkDelete($ids)
@@ -234,5 +236,30 @@ class Deals
     public function listActivities($dealId, $params = [])
     {
         return $this->curl->get('deals/' . $dealId . '/activities', $params);
+    }
+
+    /**
+     * Add follower to a deal.
+     * @param $dealId
+     * @param $userId
+     * @return array
+     */
+    public function addFollower($dealId, $userId)
+    {
+        return $this->curl->post('deals/' . $dealId . '/followers', [
+            'id' => $dealId,
+            'user_id' => $userId
+        ]);
+    }
+
+    /**
+     * Delete follower from a deal.
+     * @param $dealId
+     * @param $userId
+     * @return array
+     */
+    public function deleteFollower($dealId, $userId)
+    {
+        return $this->curl->delete('deals/' . $dealId . '/followers/' . $userId);
     }
 }
