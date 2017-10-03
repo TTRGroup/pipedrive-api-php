@@ -85,4 +85,15 @@ class Activities
     {
         return $this->curl->get('activities', $data);
     }
+
+    /**
+     * List activities by condition
+     *
+     * @param array $data
+     * @return array return all activities by data fields
+     */
+    public function getList(array $data)
+    {
+        return $this->curl->get('activities/list', $data);
+    }
 }
