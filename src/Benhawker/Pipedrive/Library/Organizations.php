@@ -144,6 +144,15 @@ class Organizations
     }
 
     /**
+     * @param $organizationId
+     * @return array
+     */
+    public function listFollowers($organizationId)
+    {
+        return $this->curl->get('organizations/' . $organizationId . '/followers');
+    }
+
+    /**
      * Add follower to organization.
      * @param $organizationId
      * @param $userId

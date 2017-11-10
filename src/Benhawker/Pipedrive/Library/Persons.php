@@ -145,6 +145,11 @@ class Persons
         return $this->curl->delete('persons/' . $personId);
     }
 
+    public function listFollowers($personId)
+    {
+        return $this->curl->get('persons/' . $personId . '/followers');
+    }
+
     /**
      * @param $personId
      * @param $followerId

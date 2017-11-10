@@ -262,4 +262,13 @@ class Deals
     {
         return $this->curl->delete('deals/' . $dealId . '/followers/' . $userId);
     }
+
+    /**
+     * @param $dealId
+     * @return array
+     */
+    public function listFollowers($dealId)
+    {
+        return $this->curl->get('deals/' . $dealId . '/followers');
+    }
 }
