@@ -66,6 +66,7 @@ class Persons
      *
      * @param  array $data (id, start, limit)
      * @return array deals
+     * @throws PipedriveMissingFieldError
      */
     public function deals(array $data)
     {
@@ -82,6 +83,7 @@ class Persons
      *
      * @param  array $data (id, start, limit)
      * @return array products
+     * @throws PipedriveMissingFieldError
      */
     public function products(array $data)
     {
@@ -110,6 +112,7 @@ class Persons
      *
      * @param  array $data persons detials
      * @return array returns detials of a person
+     * @throws PipedriveMissingFieldError
      */
     public function add(array $data)
     {
@@ -140,5 +143,28 @@ class Persons
     public function delete($personId)
     {
         return $this->curl->delete('persons/' . $personId);
+    }
+
+    /**
+     * @param $personId
+     * @param $followerId
+     * @return array
+     */
+    public function addFollower($personId, $followerId)
+    {
+        return $this->curl->post('persons/' . $personId . '/followers', [
+            'id' => $personId,
+            'user_id' => $followerId
+        ]);
+    }
+
+    /**
+     * @param $personId
+     * @param $followerId
+     * @return array
+     */
+    public function deleteFollower($personId, $followerId)
+    {
+        return $this->curl->delete('persons/' . $personId . '/followers/' . $followerId);
     }
 }
