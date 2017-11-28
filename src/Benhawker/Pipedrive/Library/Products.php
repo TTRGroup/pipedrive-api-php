@@ -1,6 +1,5 @@
 <?php namespace Benhawker\Pipedrive\Library;
 
-use Benhawker\Pipedrive\Exceptions\PipedriveMissingFieldError;
 
 /**
  * Pipedrive Products Methods
@@ -31,6 +30,16 @@ class Products
     }
 
     /**
+     * @see https://developers.pipedrive.com/docs/api/v1/#!/Products/get_products
+     * @param $data
+     * @return array
+     */
+    public function getAll($data)
+    {
+        return $this->curl->get('products', $data);
+    }
+
+    /**
      * Returns a product / products
      *
      * @param  string $name pipedrive prodeuct name
@@ -40,6 +49,16 @@ class Products
     {
         $params = array('term' => $name);
         return $this->curl->get('products/find', $params);
+    }
+
+    /**
+     * @see https://developers.pipedrive.com/docs/api/v1/#!/Products/get_products_id
+     * @param $productId
+     * @return array
+     */
+    public function getOne($productId)
+    {
+        return $this->curl->get('products/' . $productId);
     }
 
 }

@@ -26,7 +26,7 @@ class Filters
     /**
      * Returns a filter
      *
-     * @param  int   $id filter id
+     * @param  int $id filter id
      * @return array returns details of filter
      */
     public function getById($id)
@@ -74,14 +74,14 @@ class Filters
 
     public function delete($filterId)
     {
-        return $this->curl->delete('filters/'.$filterId);
+        return $this->curl->delete('filters/' . $filterId);
     }
 
 
     /**
      * Bulk delete filters
      *
-     * @param $ids comma separated ids
+     * @param string $ids comma separated ids
      * @return mixed
      */
     public function bulkDelete($ids)
@@ -98,11 +98,11 @@ class Filters
      */
     public function getAll($type)
     {
-        $supportedTypes = ['deals', 'org', 'people', 'products'];
-        if(!in_array($type, $supportedTypes)){
+        $supportedTypes = ['deals', 'org', 'people', 'products', 'activity'];
+        if (!in_array($type, $supportedTypes)) {
             throw new PipedriveMissingFieldError("Unrecognized filter type. Supported types are:" . implode(', ', $supportedTypes));
         }
-        return $this->curl->get('filters', $type);
+        return $this->curl->get('filters', ['type' => $type]);
     }
 
 }

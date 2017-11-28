@@ -35,7 +35,7 @@ class Deals
     /**
      * Returns a deal
      *
-     * @param  int   $id pipedrive deals id
+     * @param  int $id pipedrive deals id
      * @return array returns details of a deal
      */
     public function getById($id)
@@ -49,13 +49,13 @@ class Deals
      * @param  string $name pipedrive deals title
      * @return array  returns details of a deal
      */
-    public function getByName($name, $personId=null, $orgId=null)
+    public function getByName($name, $personId = null, $orgId = null)
     {
         $params = array('term' => $name);
-        if($personId) {
+        if ($personId) {
             $params['person_id'] = $personId;
         }
-        if($orgId) {
+        if ($orgId) {
             $params['org_id'] = $orgId;
         }
         return $this->curl->get('deals/find', $params);
@@ -94,11 +94,11 @@ class Deals
 
         return $this->curl->post('deals', $data);
     }
-    
+
     /**
      * Adds a product to a deal
      *
-     * @param  int   $dealId deal id
+     * @param  int $dealId deal id
      * @param  array $data deal and product details
      * @return array returns details of the deal-product
      * @throws PipedriveMissingFieldError
@@ -131,26 +131,38 @@ class Deals
      */
     public function updateProduct($dealId, array $data)
     {
-        if(!isset($data['deal_product_id'])){
+        if (!isset($data['deal_product_id'])) {
             throw new PipedriveMissingFieldError('You must include "deal_product_id" field when updating product.');
         }
 
-        if(!isset($data['item_price'])){
+        if (!isset($data['item_price'])) {
             throw new PipedriveMissingFieldError('You must include "item_price" field when updating product.');
         }
 
-        if(!isset($data['quantity'])){
+        if (!isset($data['quantity'])) {
             throw new PipedriveMissingFieldError('You must include "quantity" field when updating product');
         }
 
-        return $this->curl->put('deals/'.$dealId.'/products/'.$data['deal_product_id'], $data);
+        return $this->curl->put('deals/' . $dealId . '/products/' . $data['deal_product_id'], $data);
+    }
+
+    /**
+     * Delete attached product from deal.
+     *
+     * @param $dealId
+     * @param $productAttachmentId
+     * @return array
+     */
+    public function deleteProduct($dealId, $productAttachmentId)
+    {
+        return $this->curl->delete('deals/' . $dealId . '/products/' . $productAttachmentId);
     }
 
     /**
      * Updates a deal
      *
-     * @param  int   $dealId pipedrives deal Id
-     * @param  array $data   new details of deal
+     * @param  int $dealId pipedrives deal Id
+     * @param  array $data new details of deal
      * @return array returns details of a deal
      */
     public function update($dealId, array $data = array())
@@ -161,8 +173,8 @@ class Deals
     /**
      * Moves deal to a new stage
      *
-     * @param  int   $dealId  deal id
-     * @param  int   $stageId stage id
+     * @param  int $dealId deal id
+     * @param  int $stageId stage id
      * @return array returns details of the deal
      */
     public function moveStage($dealId, $stageId)
@@ -179,7 +191,7 @@ class Deals
 
     public function delete($dealId)
     {
-        return $this->curl->delete('deals/'.$dealId);
+        return $this->curl->delete('deals/' . $dealId);
     }
 
 
@@ -196,21 +208,21 @@ class Deals
 
     /**
      * Get deals timeline
-     * 
+     *
      */
 
     public function getDealsTimeline($params)
     {
-        if(!isset($params['start_date'])){
+        if (!isset($params['start_date'])) {
             throw new PipedriveMissingFieldError('You must include "start_date" when getting deals timeline');
         }
-        if(!isset($params['interval']) || !in_array($params['interval'],['day','week','month','quarter']) ){
+        if (!isset($params['interval']) || !in_array($params['interval'], ['day', 'week', 'month', 'quarter'])) {
             throw new PipedriveMissingFieldError('You must include "interval" when getting deals timeline');
         }
-        if(!isset($params['amount'])){
+        if (!isset($params['amount'])) {
             throw new PipedriveMissingFieldError('You must include "amount" when getting deals timeline');
         }
-        if(!isset($params['field_key'])){
+        if (!isset($params['field_key'])) {
             throw new PipedriveMissingFieldError('You must include "field_key" when getting deals timeline');
         }
 

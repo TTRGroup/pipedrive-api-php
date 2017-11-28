@@ -1,4 +1,6 @@
 <?php namespace Benhawker\Pipedrive;
+use Benhawker\Pipedrive\Library\Organizations;
+use Benhawker\Pipedrive\Library\Products;
 use Benhawker\Pipedrive\Library\SearchResults;
 
     /**
@@ -211,7 +213,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Organizations Object
      *
-     * @return Organizations Object
+     * @return Organizations
      */
     public function organizations()
     {
@@ -221,7 +223,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Products Object
      *
-     * @return Products Object
+     * @return Products
      */
     public function products()
     {
@@ -230,7 +232,7 @@ class Pipedrive
 
     /**
      * Returns the Pipedrive SearchResults Object
-     * @return SearchResults Object
+     * @return SearchResults
      */
     public function searchResults()
     {
