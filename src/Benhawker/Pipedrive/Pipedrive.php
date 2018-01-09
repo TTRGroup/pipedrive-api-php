@@ -2,8 +2,9 @@
 use Benhawker\Pipedrive\Library\Organizations;
 use Benhawker\Pipedrive\Library\Products;
 use Benhawker\Pipedrive\Library\SearchResults;
+use Benhawker\Pipedrive\Library\Stages;
 
-    /**
+/**
  * Pipedrive API wrapper class v0.1
  *
  * Author: Ben Hawker (ben@tickettoridegroup.com) 2014
@@ -108,6 +109,12 @@ class Pipedrive
     protected $searchResults;
 
     /**
+     * Placeholder attribute for Pipedrive Stages class
+     * @var Stages Object
+     */
+    protected $stages;
+
+    /**
      * Set up API url and load library classes
      *
      * @param string $apiKey   API key
@@ -139,6 +146,7 @@ class Pipedrive
         $this->products      = new Library\Products($this);
         $this->searchResults = new Library\SearchResults($this);
         $this->filters       = new Library\Filters($this);
+        $this->stages        = new Stages($this);
     }
 
     /**
@@ -238,4 +246,14 @@ class Pipedrive
     {
         return $this->searchResults;
     }
+
+    /**
+     * Returns the Pipedrive Stages Object
+     * @return Stages
+     */
+    public function stages()
+    {
+        return $this->stages;
+    }
+
 }
