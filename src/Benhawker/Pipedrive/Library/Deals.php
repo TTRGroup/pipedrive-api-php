@@ -283,4 +283,14 @@ class Deals
     {
         return $this->curl->get('deals/' . $dealId . '/followers');
     }
+
+    /**
+     * @param $dealId
+     * @param array $params
+     * @return array
+     */
+    public function flow($dealId, $params = [])
+    {
+        return $this->curl->get('deals/' . $dealId . '/flow', $params);
+    }
 }
