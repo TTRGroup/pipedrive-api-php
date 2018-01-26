@@ -293,4 +293,13 @@ class Deals
     {
         return $this->curl->get('deals/' . $dealId . '/flow', $params);
     }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    public function summary($params = [])
+    {
+        return $this->curl->get('deals/summary', $params);
+    }
 }
