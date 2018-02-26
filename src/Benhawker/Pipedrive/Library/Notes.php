@@ -49,4 +49,26 @@ class Notes
 
         return $this->curl->post('notes', $data);
     }
+
+    /**
+     * Get All Notes By Params
+     *
+     * @param array $params
+     * @return array
+     */
+    public function getAll(array $params)
+    {
+        return $this->curl->get('notes/', $params);
+    }
+
+    /**
+     * Get single note by ID
+     *
+     * @param $noteId
+     * @return array
+     */
+    public function getOne($noteId)
+    {
+        return $this->curl->get('notes/' . $noteId);
+    }
 }
