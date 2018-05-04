@@ -176,4 +176,13 @@ class Organizations
     {
         return $this->curl->delete('organizations/' . $organizationId . '/followers/' . $userId);
     }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    public function summary($params = [])
+    {
+        return $this->curl->get('organizations/summary', $params);
+    }
 }

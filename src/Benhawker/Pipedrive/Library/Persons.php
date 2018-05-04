@@ -172,4 +172,13 @@ class Persons
     {
         return $this->curl->delete('persons/' . $personId . '/followers/' . $followerId);
     }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    public function summary($params = [])
+    {
+        return $this->curl->get('persons/summary', $params);
+    }
 }
