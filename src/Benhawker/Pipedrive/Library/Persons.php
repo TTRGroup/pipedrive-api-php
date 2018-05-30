@@ -181,4 +181,18 @@ class Persons
     {
         return $this->curl->get('persons/summary', $params);
     }
+
+    /**
+     * @param array $params
+     * @return array
+     * @throws PipedriveMissingFieldError
+     */
+    public function listActivities(array $params)
+    {
+        //if there is no id set throw error as it is a required field
+        if (!isset($data['id'])) {
+            throw new PipedriveMissingFieldError('You must include the "id" of the person when getting activities');
+        }
+        return $this->curl->get('persons/' . $params['id'] . '/activities', $params);
+    }
 }
