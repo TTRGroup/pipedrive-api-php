@@ -185,4 +185,15 @@ class Organizations
     {
         return $this->curl->get('organizations/summary', $params);
     }
+
+    /**
+     * List activities associated with organization
+     * @param $organizationId
+     * @param array $data
+     * @return array
+     */
+    public function listActivities($organizationId, array $data = [])
+    {
+        return $this->curl->get('organizations/' . $organizationId . '/activities', $data);
+    }
 }
