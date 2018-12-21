@@ -1,6 +1,10 @@
 <?php namespace Benhawker\Pipedrive;
+use Benhawker\Pipedrive\Library\Organizations;
+use Benhawker\Pipedrive\Library\Products;
+use Benhawker\Pipedrive\Library\SearchResults;
+use Benhawker\Pipedrive\Library\Stages;
 
-    /**
+/**
  * Pipedrive API wrapper class v0.1
  *
  * Author: Ben Hawker (ben@tickettoridegroup.com) 2014
@@ -58,40 +62,57 @@ class Pipedrive
      */
     protected $curl;
     /**
-     * Placeholder attritube for the pipedrive persons class
+     * Placeholder attribute for the pipedrive persons class
      * @var \Benhawker\Pipedrive\Library\Persons Persons Object
      */
     protected $persons;
     /**
-     * Placeholder attritube for the pipedrive deals class
+     * Placeholder attribute for the pipedrive deals class
      * @var \Benhawker\Pipedrive\Library\Deals Deals Object
      */
     protected $deals;
+
     /**
-     * Placeholder attritube for the pipedrive activities class
+     * Placeholder attribute for pipedrive filters class
+     * @var \Benhawker\Pipedrive\Library\Filters Filters Object
+     */
+    protected $filters;
+    /**
+     * Placeholder attribute for the pipedrive activities class
      * @var \Benhawker\Pipedrive\Library\Activities Activities Object
      */
     protected $activities;
     /**
-     * Placeholder attritube for the pipedrive notes class
+     * Placeholder attribute for the pipedrive notes class
      * @var \Benhawker\Pipedrive\Library\Notes Notes Object
      */
     protected $notes;
     /**
-     * Placeholder attritube for the pipedrive dealFields class
+     * Placeholder attribute for the pipedrive dealFields class
      * @var \Benhawker\Pipedrive\Library\DealFields DealFields Object
      */
     protected $dealFields;
     /**
-     * Placeholder attritube for the pipedrive organizations class
+     * Placeholder attribute for the pipedrive organizations class
      * @var Organizations Object
      */
     protected $organizations;
     /**
-     * Placeholder attritube for the pipedrive products class
+     * Placeholder attribute for the pipedrive products class
      * @var Products Object
      */
     protected $products;
+    /**
+     * Placeholder attribute for Pipedrive SearchResults class
+     * @var \Benhawker\Pipedrive\Library\SearchResults Object
+     */
+    protected $searchResults;
+
+    /**
+     * Placeholder attribute for Pipedrive Stages class
+     * @var Stages Object
+     */
+    protected $stages;
 
     /**
      * Set up API url and load library classes
@@ -123,6 +144,9 @@ class Pipedrive
         $this->dealFields    = new Library\DealFields($this);
         $this->organizations = new Library\Organizations($this);
         $this->products      = new Library\Products($this);
+        $this->searchResults = new Library\SearchResults($this);
+        $this->filters       = new Library\Filters($this);
+        $this->stages        = new Stages($this);
     }
 
     /**
@@ -153,6 +177,15 @@ class Pipedrive
     public function deals()
     {
         return $this->deals;
+    }
+
+    /**
+     * Returns the Pipedrive Filters Object
+     * @return Library\Filters
+     */
+    public function filters()
+    {
+        return $this->filters;
     }
 
     /**
@@ -188,7 +221,7 @@ class Pipedrive
     /**
      * Returns the Pipedrive Organizations Object
      *
-     * @return Organizations Object
+     * @return Organizations
      */
     public function organizations()
     {
@@ -198,10 +231,29 @@ class Pipedrive
     /**
      * Returns the Pipedrive Products Object
      *
-     * @return Products Object
+     * @return Products
      */
     public function products()
     {
         return $this->products;
     }
+
+    /**
+     * Returns the Pipedrive SearchResults Object
+     * @return SearchResults
+     */
+    public function searchResults()
+    {
+        return $this->searchResults;
+    }
+
+    /**
+     * Returns the Pipedrive Stages Object
+     * @return Stages
+     */
+    public function stages()
+    {
+        return $this->stages;
+    }
+
 }

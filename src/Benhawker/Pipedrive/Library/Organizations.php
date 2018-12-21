@@ -62,12 +62,13 @@ class Organizations
     {
         return $this->curl->get('organizations/', $data);
     }
-    
+
     /**
      * Lists deals associated with a organization.
      *
      * @param  array $data (id, start, limit)
      * @return array deals
+     * @throws PipedriveMissingFieldError
      */
     public function deals(array $data)
     {
@@ -75,15 +76,15 @@ class Organizations
         if (!isset($data['id'])) {
             throw new PipedriveMissingFieldError('You must include the "id" of the organization when getting deals');
         }
-        return $this->curl->get('organizations/' . $data['id'] . '/deals');
+        return $this->curl->get('organizations/' . $data['id'] . '/deals', $data);
     }
 
     /**
      * Updates an organization
      *
      * @param  int   $organizationId pipedrives organization Id
-     * @param  array $data     new detials of organization
-     * @return array returns detials of a organization
+     * @param  array $data     new details of organization
+     * @return array returns details of a organization
      */
     public function update($organizationId, array $data = array())
     {
@@ -93,8 +94,9 @@ class Organizations
     /**
      * Adds a organization
      *
-     * @param  array $data organizations detials
-     * @return array returns detials of a organization
+     * @param  array $data organizations details
+     * @return array returns details of a organization
+     * @throws PipedriveMissingFieldError
      */
     public function add(array $data)
     {
@@ -110,10 +112,88 @@ class Organizations
      * Deletes an organization
      *
      * @param  int   $organizationId pipedrives organization Id
-     * @return array returns detials of a organization
+     * @return array returns details of a organization
      */
     public function delete($organizationId)
     {
         return $this->curl->delete('organizations/' . $organizationId);
+    }
+
+    /**
+     * Bulk delete organizations
+     *
+     * @param $ids
+     * @return array
+     */
+    public function bulkDelete($ids)
+    {
+        return $this->curl->bulkDelete('organizations', array('ids' => $ids));
+    }
+
+
+    /**
+     * Get persons of organization
+     *
+     * @param $organizationId
+     * @return array
+     */
+
+    public function listPersons($organizationId)
+    {
+        return $this->curl->get('organizations/'.$organizationId.'/persons');
+    }
+
+    /**
+     * @param $organizationId
+     * @return array
+     */
+    public function listFollowers($organizationId)
+    {
+        return $this->curl->get('organizations/' . $organizationId . '/followers');
+    }
+
+    /**
+     * Add follower to organization.
+     * @param $organizationId
+     * @param $userId
+     * @return array
+     */
+    public function addFollower($organizationId, $userId)
+    {
+        return $this->curl->post('organizations/' . $organizationId . '/followers',[
+            'id' => $organizationId,
+            'user_id' => $userId
+        ]);
+    }
+
+    /**
+     * Delete organization follower.
+     * @param $organizationId
+     * @param $userId
+     * @return array
+     */
+    public function deleteFollower($organizationId, $userId)
+    {
+        return $this->curl->delete('organizations/' . $organizationId . '/followers/' . $userId);
+    }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    public function summary($params = [])
+    {
+        return $this->curl->get('organizations/summary', $params);
+    }
+
+    /**
+     * List activities associated with organization
+     * @param $organizationId
+     * @param array $data
+     * @return array
+     */
+    public function listActivities($organizationId, array $data = [])
+    {
+        return $this->curl->get('organizations/' . $organizationId . '/activities', $data);
     }
 }

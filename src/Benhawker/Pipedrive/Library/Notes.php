@@ -31,8 +31,9 @@ class Notes
     /**
      * Adds a note
      *
-     * @param  array $data note detials
-     * @return array returns detials of the note
+     * @param  array $data note details
+     * @return array returns details of the note
+     * @throws PipedriveMissingFieldError
      */
     public function add(array $data)
     {
@@ -47,5 +48,27 @@ class Notes
         }
 
         return $this->curl->post('notes', $data);
+    }
+
+    /**
+     * Get All Notes By Params
+     *
+     * @param array $params
+     * @return array
+     */
+    public function getAll(array $params)
+    {
+        return $this->curl->get('notes/', $params);
+    }
+
+    /**
+     * Get single note by ID
+     *
+     * @param $noteId
+     * @return array
+     */
+    public function getOne($noteId)
+    {
+        return $this->curl->get('notes/' . $noteId);
     }
 }

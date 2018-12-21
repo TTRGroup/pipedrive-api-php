@@ -57,8 +57,9 @@ class DealFields
     /**
      * Adds a dealField
      *
-     * @param  array $data deal field detials
+     * @param  array $data deal field details
      * @return array returns details of the deal field
+     * @throws PipedriveMissingFieldError
      */
     public function add(array $data)
     {

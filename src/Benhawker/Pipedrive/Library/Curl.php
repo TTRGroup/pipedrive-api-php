@@ -44,6 +44,7 @@ class Curl
         $this->setOpt(CURLOPT_USERAGENT, self::USER_AGENT)
              ->setOpt(CURLOPT_HEADER, false)
              ->setOpt(CURLOPT_RETURNTRANSFER, true)
+             ->setOpt(CURLOPT_TIMEOUT_MS, 15000)
              ->setOpt(CURLOPT_HTTPHEADER, array("Accept: application/json"));
     }
 
@@ -120,6 +121,26 @@ class Curl
         return $this->createEndPoint($method)
                     ->setOpt(CURLOPT_CUSTOMREQUEST, 'DELETE')
                     ->exec();
+    }
+
+
+    /**
+     * Bulk delete request
+     *
+     * @param $method
+     * @param array $data
+     * @return array
+     * @throws PipedriveApiError
+     * @throws PipedriveHttpError
+     */
+    public function bulkDelete($method, array $data)
+    {
+
+        return $this->createEndPoint($method)
+            ->setOpt(CURLOPT_CUSTOMREQUEST, 'DELETE')
+            ->setOpt(CURLOPT_POSTFIELDS, http_build_query($data))
+            ->exec();
+
     }
 
     /**
@@ -232,7 +253,7 @@ class Curl
     }
 
     /**
-     * Build multidimenianl query
+     * Build multidimensional query
      * from: https://github.com/php-curl-class/php-curl-class
      *
      * @param  array  $data post data
