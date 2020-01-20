@@ -63,6 +63,11 @@ class Pipedrive
      */
     protected $persons;
     /**
+     * Placeholder attritube for the pipedrive users class
+     * @var \Benhawker\Pipedrive\Library\Users Users Object
+     */
+    protected $users;
+    /**
      * Placeholder attritube for the pipedrive deals class
      * @var \Benhawker\Pipedrive\Library\Deals Deals Object
      */
@@ -117,6 +122,7 @@ class Pipedrive
 
         //add pipedrive classes to the assoicated property
         $this->persons       = new Library\Persons($this);
+        $this->users         = new Library\Users($this);
         $this->deals         = new Library\Deals($this);
         $this->activities    = new Library\Activities($this);
         $this->notes         = new Library\Notes($this);
@@ -143,6 +149,16 @@ class Pipedrive
     public function persons()
     {
         return $this->persons;
+    }
+
+    /**
+     * Returns the Pipedrive Users Object
+     *
+     * @return \Benhawker\Pipedrive\Library\Users
+     */
+    public function users()
+    {
+        return $this->users;
     }
 
     /**
