@@ -1,9 +1,10 @@
 <?php namespace Benhawker\Pipedrive;
 
-    /**
+/**
  * Pipedrive API wrapper class v0.1
  *
  * Author: Ben Hawker (ben@tickettoridegroup.com) 2014
+ * Author: Thomas Fauré — Whaller (thomas.faure@whaller.com) 2022
  */
 
 /*
@@ -83,6 +84,16 @@ class Pipedrive
      */
     protected $dealFields;
     /**
+     * Placeholder attritube for the pipedrive dealFields class
+     * @var \Benhawker\Pipedrive\Library\PersonFields DealFields Object
+     */
+    protected $organizationFields;
+    /**
+     * Placeholder attritube for the pipedrive dealFields class
+     * @var \Benhawker\Pipedrive\Library\OrganizationFields DealFields Object
+     */
+    protected $personFields;
+    /**
      * Placeholder attritube for the pipedrive organizations class
      * @var Organizations Object
      */
@@ -116,13 +127,15 @@ class Pipedrive
         $this->curl = new Library\Curl($url, $apiKey);
 
         //add pipedrive classes to the assoicated property
-        $this->persons       = new Library\Persons($this);
-        $this->deals         = new Library\Deals($this);
-        $this->activities    = new Library\Activities($this);
-        $this->notes         = new Library\Notes($this);
-        $this->dealFields    = new Library\DealFields($this);
-        $this->organizations = new Library\Organizations($this);
-        $this->products      = new Library\Products($this);
+        $this->persons            = new Library\Persons($this);
+        $this->deals              = new Library\Deals($this);
+        $this->activities         = new Library\Activities($this);
+        $this->notes              = new Library\Notes($this);
+        $this->dealFields         = new Library\DealFields($this);
+        $this->personFields       = new Library\PersonFields($this);
+        $this->organizationFields = new Library\OrganizationFields($this);
+        $this->organizations      = new Library\Organizations($this);
+        $this->products           = new Library\Products($this);
     }
 
     /**
@@ -183,6 +196,26 @@ class Pipedrive
     public function dealFields()
     {
         return $this->dealFields;
+    }
+
+    /**
+     * Returns the Pipedrive PersonFields Object
+     *
+     * @return \Benhawker\Pipedrive\Library\PersonFields
+     */
+    public function personFields()
+    {
+        return $this->personFields;
+    }
+
+    /**
+     * Returns the Pipedrive OrganizationFields Object
+     *
+     * @return \Benhawker\Pipedrive\Library\OrganizationFields
+     */
+    public function organizationFields()
+    {
+        return $this->organizationFields;
     }
 
     /**
