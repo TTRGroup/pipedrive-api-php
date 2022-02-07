@@ -6,7 +6,20 @@
     "keywords": ["crm", "api"],
     "homepage": "",
     "license": "MIT",
-    "authors": [{"name": "TTRide Group Devs", "email": "ben@tickettoridegroup.com", "homepage": "http://tickettoridegroup.com", "role": "Developer"}],
+    "authors": [
+        {
+            "name": "TTRide Group Devs",
+            "email": "ben@tickettoridegroup.com",
+            "homepage": "http://tickettoridegroup.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Thomas Fauré",
+            "email": "thomas.faure@whaller.com",
+            "homepage": "https://whaller.com",
+            "role": "CEO"
+        }
+    ],
     "require": {
         "php": ">=5.3.0"
     },
